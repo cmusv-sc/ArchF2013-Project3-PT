@@ -1,6 +1,26 @@
-@(message: String)
+@(data: String)
 
 @main("Team Mercury") {
-    <h1>@message</h1>
+    @helper.form(action = routes.Application.sensors()){
+        <label for="id">Sensor Id</label>
+        <input type="text" name="id" value="10170102">
+
+        <label for="timestamp">Timestamp</label>
+        <input type="text" name="timestamp" value="1368568896000">
+
+        <label for="sensorType">Sensor Type</label>
+        <input type="text" name="sensorType" value="temp">
+
+        <label for="reportType">Report Type</label>
+        <input type="text" name="reportType" value="json">
+
+        <input type="submit" value="Submit">
+
+    }
+
+    <div>
+        <h2>Sensor Data:</h2>
+        <p>@data</p>
+    </div>
 
 }
