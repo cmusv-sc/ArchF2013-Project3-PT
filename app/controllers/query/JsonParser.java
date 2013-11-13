@@ -1,4 +1,4 @@
-package controllers;
+package controllers.query;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
+
 
 public class JsonParser 
 {

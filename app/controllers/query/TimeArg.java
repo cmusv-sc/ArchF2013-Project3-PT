@@ -1,4 +1,4 @@
-package controllers;
+package controllers.query;
 
 public class TimeArg 
 {

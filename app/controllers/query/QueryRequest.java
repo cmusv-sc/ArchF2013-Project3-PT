@@ -1,6 +1,9 @@
-package controllers;
+package controllers.query;
 
 import java.util.List;
+
+import controllers.Device;
+import controllers.DeviceType;
 
 import play.libs.WS;
 import play.libs.F.Function;
