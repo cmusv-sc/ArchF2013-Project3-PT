@@ -1,18 +1,18 @@
 package controllers.query;
 
-public class QueryResponse 
+import java.util.Iterator;
+
+public class QueryResponse implements Iterable<ResponseComponent>
 {
-   public QueryResponse()
+   private ArrayComponent response;
+   
+   protected QueryResponse(ArrayComponent inArr)
    {
-      /* ctor */
+      this.response = inArr;
    }
 
-   public String getValue(String key)
+   public Iterator<ResponseComponent> iterator()
    {
-      /* returns value for key
-       * or null if the key is missing
-       * Keeping it simple <String, String> for now
-       */
-	   return null;
+      return response.iterator();
    }
 }

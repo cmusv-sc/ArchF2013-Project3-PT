@@ -1,39 +1,53 @@
 package controllers.query;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-
 public class JsonParser 
 {
-   public static List<QueryResponse> toResponseList(JsonNode jsonRoot)
+   public static ArrayComponent toArrayComponent(JsonNode jsonRoot)
    {
-      ArrayList<QueryResponse> retList = new ArrayList<QueryResponse>();
+      ArrayComponent retArray = new ArrayComponent();
       //expecting an ArrayNode
-      Iterator<JsonNode> jsonIter = jsonRoot.iterator();
-      while(jsonIter.hasNext())
+      if(jsonRoot.isArray())
       {
-         JsonNode currNode = jsonIter.next();
-         QueryResponse currResp = toResponse(currNode);
-         retList.add(currResp);
+         Iterator<JsonNode> jsonIter = jsonRoot.iterator();
+         while(jsonIter.hasNext())
+         {
+            JsonNode currNode = jsonIter.next();
+            ResponseComponent currResp = toCompositeComponent(currNode);
+            retArray.add(currResp);
+         }
       }
-      return retList;
+      return retArray;
    }
 
-   public static QueryResponse toResponse(JsonNode jsonRoot)
+   public static ResponseComponent toCompositeComponent(JsonNode jsonNode)
    {
-      //expecting ObjectNode
-      QueryResponse qr = new QueryResponse();
-      Iterator<Map.Entry<String,JsonNode>> fieldIter = jsonRoot.fields();
+      CompositeComponent retComp = new CompositeComponent();
+      //we are expecting a key-value node here
+      Iterator<Map.Entry<String,JsonNode>> fieldIter = jsonNode.fields();
       while(fieldIter.hasNext())
       {
          Map.Entry<String,JsonNode> currEntry = fieldIter.next();
-         
+         JsonNode valNode = currEntry.getValue();
+         ResponseComponent valComp; 
+         if(valNode.isValueNode())
+         {
+            valComp = new ValueComponent(valNode.textValue());
+         }
+         else if(valNode.isArray())
+         {
+            valComp = toArrayComponent(valNode);
+         }
+         else
+         {
+            valComp = toCompositeComponent(valNode);
+         }
+         retComp.put(currEntry.getKey(), valComp);
       }
-      return qr;
+      return retComp;
    }
 }
