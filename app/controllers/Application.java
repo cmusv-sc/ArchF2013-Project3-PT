@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -8,7 +10,6 @@ import play.libs.WS;
 import play.mvc.*;
 
 import views.html.*;
-import views.html.index;
 
 public class Application extends Controller {
 
@@ -17,6 +18,8 @@ public class Application extends Controller {
 
     public static Result index() {
 //        String message = "Dear World, Team Mercury says Hello!";
+    	//QueryRequest qr = new QueryRequest();
+    	//List<QueryResponse> resp = qr.getAllDevices();
         return ok(index.render(null));
     }
 
