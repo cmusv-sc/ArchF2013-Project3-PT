@@ -1,8 +1,6 @@
 package controllers.query;
 
 import play.libs.WS;
-import controllers.Device;
-import controllers.DeviceType;
 
 public class QueryRequest 
 {
@@ -11,24 +9,31 @@ public class QueryRequest
       QueryResponse retVal = null;
 
       //impl of Category 3 API - get all devices
-      //this could be replaced with a builder for Requests
-      String requestURL = SITE_URL + URL_SEP + GET_ALL_DEVICES + URL_SEP
-            + JSON_RESPONSE_TYPE;
+      APIRequestBuilder request = new APIRequestBuilder();
+      request.addVerb(APIRequestVerb.GET_ALL_DEVICES);
+      request.addResponseType(APIResponseType.JSON);
 
-      //go synchronus for ease of impl
-      WS.Response response = WS.url(requestURL).get().get(DEFAULT_TIMEOUT);
-      retVal = new QueryResponse(JsonParser.toArrayComponent(response.asJson()));
+      retVal = executeGetRequest(request);
 
       return retVal;
    }
 
-   public QueryResponse getSensorTypes(DeviceType dType)
+   public QueryResponse getSensorTypes(String dType)
    {
-      /* impl of Category 3 API */
-      return null;
+      QueryResponse retVal = null;
+      
+      //impl of Category 3 API
+      APIRequestBuilder request = new APIRequestBuilder();
+      request.addVerb(APIRequestVerb.GET_SENSOR_TYPES);
+      request.addStringArg(dType);
+      request.addResponseType(APIResponseType.JSON);
+
+      retVal = executeGetRequest(request);
+
+      return retVal;
    }
 
-   public QueryResponse getSensorReadingByTime(Device device, 
+   public QueryResponse getSensorReadingByTime(String device, 
                                                String sensorType,
                                                TimeArg timeframe)
    {
@@ -36,13 +41,21 @@ public class QueryRequest
       return null;
    }
 
+   private QueryResponse executeGetRequest(APIRequestBuilder request)
+   {
+      QueryResponse retVal = null;
+      
+      String requestUrl = request.toString();
+      
+      //go synchronus for ease of impl
+      WS.Response response = WS.url(requestUrl).get().get(DEFAULT_TIMEOUT);
+      
+      retVal = new QueryResponse(JsonParser.toArrayComponent(response.asJson()));
+      
+      return retVal;
+   }
+   
    //--------------------------------------------------------------------------
 
    private static long DEFAULT_TIMEOUT = 5000;
-   private static final String SITE_URL = "http://einstein.sv.cmu.edu";
-   private static final String URL_SEP = "/";
-   private static final String JSON_RESPONSE_TYPE = "json";
-   private static final String GET_ALL_DEVICES = "get_devices";
-   private static final String GET_SENSOR_TYPES = "get_sensor_type";
-   private static final String GET_SENSOR_READING = "sensors";
 }
