@@ -15,3 +15,6 @@ dist
 /.settings
 atlassian-ide-plugin.xml
 /.target
+.metadata
+/RemoteSystemsTempFiles/
+.gitignore~
