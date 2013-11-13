@@ -2,6 +2,9 @@ package controllers;
 
 import java.util.List;
 
+import controllers.query.QueryRequest;
+import controllers.query.QueryResponse;
+
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -19,7 +22,7 @@ public class Application extends Controller {
     public static Result index() {
 //        String message = "Dear World, Team Mercury says Hello!";
     	//QueryRequest qr = new QueryRequest();
-    	//List<QueryResponse> resp = qr.getAllDevices();
+    	//QueryResponse resp = qr.getAllDevices();
         return ok(index.render(null));
     }
 
