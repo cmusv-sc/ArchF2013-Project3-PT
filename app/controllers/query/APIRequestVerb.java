@@ -20,7 +20,17 @@ enum APIRequestVerb
     * https://github.com/SensorServicePlatform/APIs#20 
     * https://github.com/SensorServicePlatform/APIs#21
     */
-   GET_SENSOR_READING("sensors");
+   GET_SENSOR_READING("sensors"),
+   /** for Category2 API 
+    * https://github.com/SensorServicePlatform/APIs#6
+    */
+   GET_LAST_READINGS("last_readings_from_all_devices"),
+   /** for Category2 API 
+    * https://github.com/SensorServicePlatform/APIs#7
+    * These readings are the most last
+    */
+   GET_LASTEST_READINGS("lastest_readings_from_all_devices");
+   
    
    private final String verbString;
    
