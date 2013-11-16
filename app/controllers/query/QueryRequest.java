@@ -2,8 +2,17 @@ package controllers.query;
 
 import play.libs.WS;
 
+/**
+ * This class houses the low-level interface with the Sensor API
+ * @author geoffschaeffer
+ */
 public class QueryRequest 
 {
+   /**
+    * Builds and executes Cat3 API
+    * https://github.com/SensorServicePlatform/APIs#1
+    * @return QueryResponse
+    */
    public QueryResponse getAllDevices()
    {
       QueryResponse retVal = null;
@@ -18,6 +27,12 @@ public class QueryRequest
       return retVal;
    }
 
+   /**
+    * Builds and executes Cat3 API
+    * https://github.com/SensorServicePlatform/APIs#2
+    * @param dType 
+    * @return QueryResponse
+    */
    public QueryResponse getSensorTypes(String dType)
    {
       QueryResponse retVal = null;
@@ -33,6 +48,14 @@ public class QueryRequest
       return retVal;
    }
 
+   /**
+    * Builds and executes Cat2 API
+    * https://github.com/SensorServicePlatform/APIs#4
+    * @param device
+    * @param sensorType
+    * @param timeframe
+    * @return QueryResponse
+    */
    public QueryResponse getSensorReadingByTime(String device, 
                                                String sensorType,
                                                TimeArg timeframe)

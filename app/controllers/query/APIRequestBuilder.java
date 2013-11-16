@@ -1,6 +1,10 @@
 package controllers.query;
 
-public class APIRequestBuilder
+/**
+ * Builder class for API requests
+ * @author geoffschaeffer
+ */
+class APIRequestBuilder
 {
    private StringBuilder bldr;
    
@@ -27,7 +31,7 @@ public class APIRequestBuilder
       bldr.append(URL_SEP);
       bldr.append(arg);
    }
-   
+
    public String toString()
    {
       return bldr.toString();

@@ -1,6 +1,9 @@
 package controllers.query;
 
-public class TimeArg 
+/**
+ * Tagging Abstract Superclass for time arguments
+ * @author geoffschaeffer
+ */
+public abstract class TimeArg
 {
-
 }

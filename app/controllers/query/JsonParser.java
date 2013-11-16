@@ -5,9 +5,13 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class JsonParser 
+/**
+ * Helper class to parse Json into ResponseComponents
+ * @author geoffschaeffer
+ */
+class JsonParser 
 {
-   public static ArrayComponent toArrayComponent(JsonNode jsonRoot)
+   protected static ArrayComponent toArrayComponent(JsonNode jsonRoot)
    {
       ArrayComponent retArray = new ArrayComponent();
       //expecting an ArrayNode
@@ -30,7 +34,7 @@ public class JsonParser
       return retArray;
    }
 
-   public static ResponseComponent toCompositeComponent(JsonNode jsonNode)
+   protected static ResponseComponent toCompositeComponent(JsonNode jsonNode)
    {
       CompositeComponent retComp = new CompositeComponent();
       //we are expecting a key-value node here

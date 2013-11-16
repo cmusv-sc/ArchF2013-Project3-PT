@@ -1,7 +1,12 @@
 package controllers.query;
 
-public enum APIResponseType
+/**
+ * Enum to hold mappings to Restful API response types
+ * @author geoffschaeffer
+ */
+enum APIResponseType
 {
+   /** JSON response */
    JSON("json");
    
    private final String respString;
@@ -11,7 +16,11 @@ public enum APIResponseType
       respString = _respString;
    }
    
-   public String getResponseString()
+   /**
+    * Get the enum as string for use in API
+    * @return enum value as API string
+    */
+   protected String getResponseString()
    {
       return respString;
    }
