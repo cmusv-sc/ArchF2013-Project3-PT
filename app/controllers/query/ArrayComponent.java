@@ -2,10 +2,11 @@ package controllers.query;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ArrayComponent extends ResponseComponent implements Iterable<ResponseComponent>
 {
-   private ArrayList<ResponseComponent> theArray;
+   private List<ResponseComponent> theArray;
    
    protected ArrayComponent()
    {

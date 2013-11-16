@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class JsonParser 
 {
-   public static ArrayComponent toArrayComponent(JsonNode jsonRoot)
+   public static ResponseComponent toArrayComponent(JsonNode jsonRoot)
    {
       ArrayComponent retArray = new ArrayComponent();
       //expecting an ArrayNode

@@ -20,4 +20,9 @@ public class CompositeComponent extends ResponseComponent
    {
       return compMap.get(key);
    }
+
+   public Map asMap()
+   {
+      return this.compMap;
+   }
 }
