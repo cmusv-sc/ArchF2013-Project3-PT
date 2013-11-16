@@ -5,9 +5,13 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class JsonParser 
+/**
+ * Helper class to parse Json into ResponseComponents
+ * @author geoffschaeffer
+ */
+class JsonParser 
 {
-   public static ResponseComponent toArrayComponent(JsonNode jsonRoot)
+   protected static ArrayComponent toArrayComponent(JsonNode jsonRoot)
    {
       ArrayComponent retArray = new ArrayComponent();
       //expecting an ArrayNode
@@ -21,32 +25,41 @@ public class JsonParser
             retArray.add(currResp);
          }
       }
+      else if(jsonRoot.isObject())
+      {
+         //have an object instead - wrap it in an array
+         ResponseComponent newComp = toCompositeComponent(jsonRoot);
+         retArray.add(newComp);
+      }
       return retArray;
    }
 
-   public static ResponseComponent toCompositeComponent(JsonNode jsonNode)
+   protected static ResponseComponent toCompositeComponent(JsonNode jsonNode)
    {
       CompositeComponent retComp = new CompositeComponent();
       //we are expecting a key-value node here
-      Iterator<Map.Entry<String,JsonNode>> fieldIter = jsonNode.fields();
-      while(fieldIter.hasNext())
+      if(jsonNode.isObject())
       {
-         Map.Entry<String,JsonNode> currEntry = fieldIter.next();
-         JsonNode valNode = currEntry.getValue();
-         ResponseComponent valComp; 
-         if(valNode.isValueNode())
+         Iterator<Map.Entry<String,JsonNode>> fieldIter = jsonNode.fields();
+         while(fieldIter.hasNext())
          {
-            valComp = new ValueComponent(valNode.textValue());
+            Map.Entry<String,JsonNode> currEntry = fieldIter.next();
+            JsonNode valNode = currEntry.getValue();
+            ResponseComponent valComp; 
+            if(valNode.isValueNode())
+            {
+               valComp = new ValueComponent(valNode.textValue());
+            }
+            else if(valNode.isArray())
+            {
+               valComp = toArrayComponent(valNode);
+            }
+            else
+            {
+               valComp = toCompositeComponent(valNode);
+            }
+            retComp.put(currEntry.getKey(), valComp);
          }
-         else if(valNode.isArray())
-         {
-            valComp = toArrayComponent(valNode);
-         }
-         else
-         {
-            valComp = toCompositeComponent(valNode);
-         }
-         retComp.put(currEntry.getKey(), valComp);
       }
       return retComp;
    }

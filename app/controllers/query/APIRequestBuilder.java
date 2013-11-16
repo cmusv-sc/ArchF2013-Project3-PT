@@ -1,6 +1,10 @@
 package controllers.query;
 
-public class APIRequestBuilder
+/**
+ * Builder class for API requests
+ * @author geoffschaeffer
+ */
+class APIRequestBuilder
 {
    private StringBuilder bldr;
    
@@ -21,11 +25,23 @@ public class APIRequestBuilder
       bldr.append(URL_SEP);
       bldr.append(resp.getResponseString());
    }
-   
-   protected void addStringArg(String arg)
+
+   protected void addTimeArg(QueryTimeArg arg)
    {
       bldr.append(URL_SEP);
-      bldr.append(arg);
+      bldr.append(arg.toString());
+   }
+   
+   protected void addDeviceArg(QueryDeviceArg arg)
+   {
+      bldr.append(URL_SEP);
+      bldr.append(arg.toString());
+   }
+   
+   protected void addSensorTypeArg(QuerySensorTypeArg arg)
+   {
+      bldr.append(URL_SEP);
+      bldr.append(arg.toString());
    }
    
    public String toString()

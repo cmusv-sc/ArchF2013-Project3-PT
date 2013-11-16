@@ -23,6 +23,8 @@ public class Application extends Controller {
 //        String message = "Dear World, Team Mercury says Hello!";
     	//QueryRequest qr = new QueryRequest();
     	//QueryResponse resp = qr.getAllDevices();
+      //QueryDeviceArg qda = new QueryDeviceArg("firefly_v3");
+      //QueryResponse resp = qr.getSensorTypes(qda); 
         return ok(index.render(null));
     }
 
