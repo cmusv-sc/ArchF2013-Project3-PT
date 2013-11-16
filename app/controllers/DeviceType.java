@@ -4,17 +4,17 @@ import java.util.List;
 
 public class DeviceType 
 {
-  private String typeName;
-  private List<Sensor> sensors;  
+  private final String typeName;
+  private List<SensorType> sensors;  
 
   protected DeviceType(String typeName)
   {
     this.typeName = typeName;
   }
 
-  protected void add(Sensor sensor)
+  protected void add(SensorType sensorType)
   {
-    sensors.add(sensor);
+    sensors.add(sensorType);
   }
 
   public String getType()
@@ -22,7 +22,7 @@ public class DeviceType
     return typeName;
   }
 
-  public List<Sensor> getSensors()
+  public List<SensorType> getSensorTypes()
   {
     return sensors;
   }
