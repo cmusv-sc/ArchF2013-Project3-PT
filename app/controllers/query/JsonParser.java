@@ -21,6 +21,12 @@ public class JsonParser
             retArray.add(currResp);
          }
       }
+      else if(jsonRoot.isObject())
+      {
+         //have an object instead - wrap it in an array
+         ResponseComponent newComp = toCompositeComponent(jsonRoot);
+         retArray.add(newComp);
+      }
       return retArray;
    }
 
@@ -28,25 +34,28 @@ public class JsonParser
    {
       CompositeComponent retComp = new CompositeComponent();
       //we are expecting a key-value node here
-      Iterator<Map.Entry<String,JsonNode>> fieldIter = jsonNode.fields();
-      while(fieldIter.hasNext())
+      if(jsonNode.isObject())
       {
-         Map.Entry<String,JsonNode> currEntry = fieldIter.next();
-         JsonNode valNode = currEntry.getValue();
-         ResponseComponent valComp; 
-         if(valNode.isValueNode())
+         Iterator<Map.Entry<String,JsonNode>> fieldIter = jsonNode.fields();
+         while(fieldIter.hasNext())
          {
-            valComp = new ValueComponent(valNode.textValue());
+            Map.Entry<String,JsonNode> currEntry = fieldIter.next();
+            JsonNode valNode = currEntry.getValue();
+            ResponseComponent valComp; 
+            if(valNode.isValueNode())
+            {
+               valComp = new ValueComponent(valNode.textValue());
+            }
+            else if(valNode.isArray())
+            {
+               valComp = toArrayComponent(valNode);
+            }
+            else
+            {
+               valComp = toCompositeComponent(valNode);
+            }
+            retComp.put(currEntry.getKey(), valComp);
          }
-         else if(valNode.isArray())
-         {
-            valComp = toArrayComponent(valNode);
-         }
-         else
-         {
-            valComp = toCompositeComponent(valNode);
-         }
-         retComp.put(currEntry.getKey(), valComp);
       }
       return retComp;
    }
