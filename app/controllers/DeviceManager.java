@@ -1,6 +1,5 @@
 package controllers;
 
-import controllers.query.ArrayComponent;
 import controllers.query.CompositeComponent;
 import controllers.query.QueryDeviceArg;
 import controllers.query.QueryRequest;
@@ -25,7 +24,7 @@ public class DeviceManager
    private static final String DEVICE_TYPE = "device_type";
    private static final String END_TIME = "end_time";
    private static final String LAST_READINGS = "last_readings";
-   private static final String LATEST_READINGS = "latest_readings";
+   private static final String LASTEST_READINGS = "lastest_readings";
    private static final String POINT_IN_TIME_READING = "point_in_time_reading";
    private static final String QUERY_TYPE = "query_type";
    private static final String SENSOR_TYPE = "sensor_type";
@@ -59,50 +58,49 @@ public class DeviceManager
       return devices;
    }
 
-   //TODO: fix and uncomment
-//   public List<SensorReading> getSensorReadings(Map parameters)
-//   {
-//      String queryType = parameters.get(QUERY_TYPE);
-//      QueryRequest request = new QueryRequest();
-//      QueryResponse response = null;
-//      if (queryType.equals(LAST_READINGS))
-//      {
-//         QuerySensorTypeArg sensorType = 
-//            new QuerySensorTypeArg(parameters.getValueAsString(SENSOR_TYPE));
-//         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
-//         response = request.getLastReadings(sensorType, time);
-//      } 
-//      else if (queryType.equals(LATEST_READINGS))
-//      {
-//         QuerySensorTypeArg sensorType = 
-//            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
-//         response = request.getLatestReading(sensor_type);
-//      } 
-//      else if (queryType.equals(TIMEFRAME_READINGS))
-//      {
-//         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
-//         QuerySensorTypeArg sensorType = 
-//            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
-//         QueryTimeArg startTime = new QueryTimeArg(parameters.get(START_TIME));
-//         QueryTimeArg endTime = new QueryTimeArg(parameters.get(END_TIME));
-//         response = request.getSensorReadingsByTimeRange(device, sensorType,
-//                                                         startTime, endTime);
-//      } 
-//      else if (queryType.equals(POINT_IN_TIME_READING))
-//      {
-//         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
-//         QuerySensorTypeArg sensorType = 
-//            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
-//         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
-//         response = request.getSensorReadingByTimePoint(device, sensorType,
-//                                                        time);
-//      } 
-//      else
-//      {
-//         throw new RuntimeException("Not a valid query");
-//      }
-//      return makeSensorReadingList(response);
-//   }
+   public List<SensorReading> getSensorReadings(Map<String, String> parameters)
+   {
+      String queryType = parameters.get(QUERY_TYPE);
+      QueryRequest request = new QueryRequest();
+      QueryResponse response = null;
+      if (queryType.equals(LAST_READINGS))
+      {
+         QuerySensorTypeArg sensorType = 
+            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
+         response = request.getLastReadings(sensorType, time);
+      } 
+      else if (queryType.equals(LASTEST_READINGS))
+      {
+         QuerySensorTypeArg sensorType = 
+            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+         response = request.getLastestReadings(sensorType);
+      } 
+      else if (queryType.equals(TIMEFRAME_READINGS))
+      {
+         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
+         QuerySensorTypeArg sensorType = 
+            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+         QueryTimeArg startTime = new QueryTimeArg(parameters.get(START_TIME));
+         QueryTimeArg endTime = new QueryTimeArg(parameters.get(END_TIME));
+         response = request.getSensorReadingByTimeRange(device, sensorType,
+                                                        startTime, endTime);
+      } 
+      else if (queryType.equals(POINT_IN_TIME_READING))
+      {
+         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
+         QuerySensorTypeArg sensorType = 
+            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
+         response = request.getSensorReadingByTimePoint(device, sensorType,
+                                                        time);
+      } 
+      else
+      {
+         throw new RuntimeException("Not a valid query");
+      }
+      return makeSensorReadingList(response);
+   }
 
    private Set<DeviceType> makeDeviceTypeSet(QueryResponse devices) 
    {
