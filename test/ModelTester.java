@@ -25,11 +25,10 @@ public class ModelTester
        * testing setters and getters for device
        */
 
-      Device device = new Device();
-      device.setDeviceId("some device id");
-      device.setDeviceType(new DeviceType("some device type"));
-      device.setDeviceAgent("some device agent");
-      device.setDeviceLocation("some device location");
+      Device device = new Device("some device id",
+                                 new DeviceType("some device type"),
+                                 "some device agent",
+                                 "some device location");
       System.out.printf("device data 1:\n %s\n", device.toString());
 
       /*
