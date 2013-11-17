@@ -3,20 +3,21 @@ package controllers.query;
 /**
  * ResponseComponent that represents a Value
  * @author geoffschaeffer
+ * @param <T> The type of object value this holds
  */
-public class ValueComponent extends ResponseComponent
+public class ValueComponent<T> extends ResponseComponent
 {
-   String value;
+   T value;
    
-   protected ValueComponent(String strVal)
+   protected ValueComponent(T inVal)
    {
-      this.value = strVal;
+      this.value = inVal;
    }
    
    /**
-    * @return Component value as string
+    * @return Component value as <T>
     */
-   public String getValue()
+   public T getValue()
    {
       return value;
    }
