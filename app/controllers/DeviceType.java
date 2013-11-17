@@ -7,7 +7,7 @@ public class DeviceType
   private final String typeName;
   private List<SensorType> sensors;  
 
-  protected DeviceType(String typeName)
+  public DeviceType(String typeName)
   {
     this.typeName = typeName;
   }
@@ -27,12 +27,24 @@ public class DeviceType
     return sensors;
   }
 
-  @Override
-  public boolean equals(Object o)
-  {
-    if (o == this){ 
-      return true;
-    }
-    if (
-  }
+   @Override
+   public boolean equals(Object o)
+   {
+      if (o == this)
+      {
+         return true;
+      }
+      if (!(o instanceof DeviceType))
+      {
+         return false;
+      }
+      DeviceType dt = (DeviceType)o;
+      return typeName.equals(dt.typeName);
+   }
+   
+   @Override
+   public int hashCode()
+   {
+      return typeName.hashCode();
+   }
 }

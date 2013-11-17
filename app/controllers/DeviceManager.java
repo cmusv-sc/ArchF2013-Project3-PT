@@ -10,6 +10,8 @@ import controllers.query.QueryTimeArg;
 import controllers.query.ResponseComponent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -33,95 +35,120 @@ public class DeviceManager
    private static final String URI = "uri";
    private static final String VALUE = "value";
 
+   /**
+    * Gets the devices available in the sensor network
+    * @return a list of devices
+    */
    public List<Device> getDevices()
    {
       QueryRequest request = new QueryRequest();
       QueryResponse deviceResp = request.getAllDevices();
-      Set deviceTypes = makeDeviceTypeSet(deviceResp);
+      Set<DeviceType> deviceTypes = makeDeviceTypeSet(deviceResp);
       deviceTypes = addSensorTypes(request, deviceTypes);
-      Map deviceTypeMap = makeDeviceTypeMap(deviceTypes);
-      List<Device> devices = new ArrayList();
+      Map<String, DeviceType> deviceTypeMap = makeDeviceTypeMap(deviceTypes);
+      List<Device> devices = new ArrayList<Device>();
       for (ResponseComponent deviceNode : deviceResp)
       {
          CompositeComponent compNode = (CompositeComponent) deviceNode;
-         Device device = new Device(compNode.get(URI),
-               deviceTypeMap.get(compNode.get(DEVICE_TYPE)),
-               compNode.get(DEVICE_AGENT), compNode.get(DEVICE_LOCATION));
+         Device device = new Device(compNode.getValueAsString(URI),
+                                    deviceTypeMap.get(compNode.get(DEVICE_TYPE)),
+                                    compNode.getValueAsString(DEVICE_AGENT),
+                                    compNode.getValueAsString(DEVICE_LOCATION));
          devices.add(device);
       }
       return devices;
    }
 
-   public List<SensorReading> getSensorReadings(Map parameters)
+   //TODO: fix and uncomment
+//   public List<SensorReading> getSensorReadings(Map parameters)
+//   {
+//      String queryType = parameters.get(QUERY_TYPE);
+//      QueryRequest request = new QueryRequest();
+//      QueryResponse response = null;
+//      if (queryType.equals(LAST_READINGS))
+//      {
+//         QuerySensorTypeArg sensorType = 
+//            new QuerySensorTypeArg(parameters.getValueAsString(SENSOR_TYPE));
+//         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
+//         response = request.getLastReadings(sensorType, time);
+//      } 
+//      else if (queryType.equals(LATEST_READINGS))
+//      {
+//         QuerySensorTypeArg sensorType = 
+//            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+//         response = request.getLatestReading(sensor_type);
+//      } 
+//      else if (queryType.equals(TIMEFRAME_READINGS))
+//      {
+//         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
+//         QuerySensorTypeArg sensorType = 
+//            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+//         QueryTimeArg startTime = new QueryTimeArg(parameters.get(START_TIME));
+//         QueryTimeArg endTime = new QueryTimeArg(parameters.get(END_TIME));
+//         response = request.getSensorReadingsByTimeRange(device, sensorType,
+//                                                         startTime, endTime);
+//      } 
+//      else if (queryType.equals(POINT_IN_TIME_READING))
+//      {
+//         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
+//         QuerySensorTypeArg sensorType = 
+//            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+//         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
+//         response = request.getSensorReadingByTimePoint(device, sensorType,
+//                                                        time);
+//      } 
+//      else
+//      {
+//         throw new RuntimeException("Not a valid query");
+//      }
+//      return makeSensorReadingList(response);
+//   }
+
+   private Set<DeviceType> makeDeviceTypeSet(QueryResponse devices) 
    {
-      String queryType = parameters.get(QUERY_TYPE);
-      QueryRequest request = new QueryRequest();
-      QueryResponse response = null;
-      if (queryType.equals(LAST_READINGS))
+      Set<DeviceType> deviceTypes = new HashSet<DeviceType>();
+      for(ResponseComponent deviceNode: devices) 
       {
-         QuerySensorTypeArg sensorType = new QuerySensorTypeArg(
-               parameters.get(SENSOR_TYPE));
-         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
-         response = request.getLastReadings(sensorType, time);
-      } else if (queryType.equals(LATEST_READINGS))
-      {
-         QuerySensorTypeArg sensorType = new QuerySensorTypeArg(
-               parameters.get(SENSOR_TYPE));
-         response = request.getLatestReading(sensor_type);
-      } else if (queryType.equals(TIMEFRAME_READINGS))
-      {
-         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
-         QuerySensorTypeArg sensorType = new QuerySensorTypeArg(
-               parameters.get(SENSOR_TYPE));
-         QueryTimeArg startTime = new QueryTimeArg(parameters.get(START_TIME));
-         QueryTimeArg endTime = new QueryTimeArg(parameters.get(END_TIME));
-         response = request.getSensorReadingsByTimeRange(device, sensorType,
-               startTime, endTime);
-      } else if (queryType.equals(POINT_IN_TIME_READING))
-      {
-         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
-         QuerySensorTypeArg sensorType = new QuerySensorTypeArg(
-               parameters.get(SENSOR_TYPE));
-         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
-         response = request.getSensorReadingByTimePoint(device, sensorType,
-               time);
-      } else
-      {
-         throw new RuntimeException("Not a valid query");
+         CompositeComponent compNode = (CompositeComponent) deviceNode;
+         DeviceType device = new DeviceType(compNode.getValueAsString(DEVICE_TYPE));
+         deviceTypes.add(device);
       }
-      return makeSensorReadingsList(response);
+      return deviceTypes;
    }
 
-   private Set makeDeviceTypeSet(QueryResponse devices) {
-    Set deviceTypes = new HashSet();
-    for(CompositeComponent (CompositeComponent)deviceNode: devices) {
-      device = new DeviceType(deviceNode.get(DEVICE_TYPE).getValue());
-      deviceTypes.add(device);
-    }
-    return deviceTypes;
-  }
-
-   private Set addSensorTypes(QueryRequest request, Set deviceTypes)
+   private Set<DeviceType> addSensorTypes(QueryRequest request, Set<DeviceType> deviceTypes)
    {
       QueryResponse sensorTypeResp;
       for (DeviceType deviceType : deviceTypes)
       {
-         deviceTypeArg = new QueryDeviceArg(deviceType.getType());
+         QueryDeviceArg deviceTypeArg = new QueryDeviceArg(deviceType.getType());
          sensorTypeResp = request.getSensorTypes(deviceTypeArg);
-         ArrayComponent sensorTypes = (ArrayComponent) ((CompositeComponent) sensorTypeResp
-               .next()).get(SENSOR_TYPES);
-         for (String sensorTypeName : sensorTypes)
+         
+         for(ResponseComponent sTypeNode : sensorTypeResp)
          {
-            SensorType sensorType = new SensorType(sensorTypeName);
-            deviceType.add(sensorType);
+            CompositeComponent compNode = (CompositeComponent) sTypeNode;
+            String sensorTypesStr = compNode.getValueAsString(SENSOR_TYPE);
+            List<String> sensorTypes = parseSensorTypesToList(sensorTypesStr);
+            for (String sensorTypeName : sensorTypes)
+            {
+               SensorType sensorType = new SensorType(sensorTypeName);
+               deviceType.add(sensorType);
+            }
          }
       }
       return deviceTypes;
    }
 
-   private Map makeDeviceTypeMap(Set deviceTypes)
+   private List<String> parseSensorTypesToList(String sensorTypesStr)
    {
-      Map deviceTypeMap = new HashMap();
+      List<String> retList = Arrays.asList(sensorTypesStr.split(","));
+      
+      return retList;
+   }
+   
+   private Map<String, DeviceType> makeDeviceTypeMap(Set<DeviceType> deviceTypes)
+   {
+      Map<String, DeviceType> deviceTypeMap = new HashMap<String, DeviceType>();
       for (DeviceType deviceType : deviceTypes)
       {
          deviceTypeMap.put(deviceType.getType(), deviceType);
@@ -129,16 +156,18 @@ public class DeviceManager
       return deviceTypeMap;
    }
 
-   private List<SensorReading> makeSensorReadingList(QueryResponse response) {
-    List<SensorReading> sensorReadings = new ArrayList();
-    for(CompositeComponent (CompositeComponent) readingNode: response) {
-      sensorReading = new SensorReading(
-          readingNode.get(DEVICE_ID),
-          readingNode.get(SENSOR_TYPE),
-          readingNode.get(VALUE),
-          readingNode.get(TIMESTAMP));
-      sensorReadings.add(sensorReading);     
-    }
-    return sensorReadings;
-  }
+   private List<SensorReading> makeSensorReadingList(QueryResponse response) 
+   {
+      List<SensorReading> sensorReadings = new ArrayList<SensorReading>();
+      for(ResponseComponent respNode : response) 
+      {
+         CompositeComponent readingNode = (CompositeComponent) respNode;
+         SensorReading sensorReading = new SensorReading(readingNode.getValueAsString(DEVICE_ID),
+                                                         readingNode.getValueAsString(SENSOR_TYPE),
+                                                         readingNode.getValueAsString(VALUE),
+                                                         readingNode.getValueAsString(TIMESTAMP));
+         sensorReadings.add(sensorReading);     
+      }
+      return sensorReadings;
+   }
 }
