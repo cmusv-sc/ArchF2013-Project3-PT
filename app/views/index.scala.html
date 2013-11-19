@@ -1,14 +1,17 @@
-@(data: String)
-
 @main("Team Mercury") {
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2 class="panel-title">Sensor Data</h2>
+                    <h2 class="panel-title">
+                        Sensor Data
+                        <img id="metadataActivity" style="display: none;"
+                            src="@routes.Assets.at("images/activity_indicator.gif")" width="20">
+                    </h2>
+
                 </div>
-                <div class="panel-body">
-                    @data
+                <div id="deviceContainer" class="panel-body">
+                    <div id="deviceDropdownContainer"></div>
                 </div>
             </div>
         </div>

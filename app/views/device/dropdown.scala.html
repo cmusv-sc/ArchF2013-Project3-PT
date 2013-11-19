@@ -1,0 +1,9 @@
+@(devices: java.util.List[Device])
+
+@if(!devices.isEmpty) {
+    <select id="devices">
+    @for(device <- devices) {
+        <option value="@device.getDeviceId">@device.getDeviceId</option>
+    }
+    </select>
+}

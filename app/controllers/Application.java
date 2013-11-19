@@ -12,7 +12,7 @@ import play.libs.F.*;
 import play.libs.WS;
 import play.mvc.*;
 
-import views.html.*;
+import views.html.index;
 
 public class Application extends Controller {
 
@@ -20,12 +20,12 @@ public class Application extends Controller {
     private static final String URL = "http://einstein.sv.cmu.edu/sensors";
 
     public static Result index() {
-//        String message = "Dear World, Team Mercury says Hello!";
-    	//QueryRequest qr = new QueryRequest();
-    	//QueryResponse resp = qr.getAllDevices();
-      //QueryDeviceArg qda = new QueryDeviceArg("firefly_v3");
-      //QueryResponse resp = qr.getSensorTypes(qda); 
-        return ok(index.render(null));
+        String message = "Dear World, Team Mercury says Hello!";
+        DeviceManager deviceManager = new DeviceManager();
+        List<Device> devices = null;
+//        devices = deviceManager.getDevices();
+//        return ok(index.render(devices));
+        return ok(index.render());
     }
 
     /*public static Promise<Result> index() {
@@ -60,12 +60,25 @@ public class Application extends Controller {
             @Override
             public Result apply(WS.Response resp) throws Throwable {
 //                System.out.println(resp.asJson());
-                return ok(index.render("Results: " + resp.asJson()));
-//                return ok(resp.asJson());
+//                return ok(index.render("Results: " + resp.asJson()));
+                return ok();
             }
         });
 
 //        return ok(index.render("Results:", "hello"));
+    }
+
+    /**
+     * Javascript routes for AJAX operations.
+     * Reference: http://www.playframework.com/documentation/2.2.x/JavaGuide6
+     */
+    public static Result javascriptRoutes() {
+        response().setContentType("text/javascript");
+        return ok(
+            Routes.javascriptRouter("jsRoutes",
+                        routes.javascript.Devices.index()
+            )
+        );
     }
 
 
