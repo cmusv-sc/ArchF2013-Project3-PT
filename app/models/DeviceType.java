@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeviceType 
@@ -10,6 +11,7 @@ public class DeviceType
   public DeviceType(String typeName)
   {
     this.typeName = typeName;
+    this.sensors = new ArrayList<SensorType>();
   }
 
   public void add(SensorType sensorType)
