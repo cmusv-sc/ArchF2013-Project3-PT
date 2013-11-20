@@ -68,8 +68,8 @@ public class DeviceManager
       QueryResponse deviceResp = request.getAllDevices();
       Set<DeviceType> deviceTypes = makeDeviceTypeSet(deviceResp);
       deviceTypes = addSensorTypes(request, deviceTypes);
-      List deviceTypeList = new ArrayList<DeviceType>(deviceTypes);
-      return deviceTypeList
+      List<DeviceType> deviceTypeList = new ArrayList<DeviceType>(deviceTypes);
+      return deviceTypeList;
    }
 
    public List<SensorReading> getSensorReadings(Map<String, String> parameters)
