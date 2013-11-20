@@ -1,5 +1,10 @@
 package models.query;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import play.libs.WS;
 
 /**
@@ -157,16 +162,51 @@ public class QueryRequest
       QueryResponse retVal = null;
       
       String requestUrl = request.toString();
-      
+            
       //go synchronus for ease of impl
       WS.Response response = WS.url(requestUrl).get().get(DEFAULT_TIMEOUT);
       
-      retVal = new QueryResponse(JsonParser.toArrayComponent(response.asJson()));
+      JsonNode apiResponseJson = null;
+      String apiResponseString = response.getBody();
+      //Hacky way to get around the fact that it is tough
+      //to catch a JsonParseException from Play internals
+      if(!responseIsError(apiResponseString))
+      {
+         apiResponseJson = response.asJson();
+      }
+      
+      if(apiResponseJson != null)
+      {
+         retVal = new QueryResponse(JsonParser.toArrayComponent(apiResponseJson));
+      }
+      else
+      {
+         //swallow up errors and return an empty array
+         retVal = new QueryResponse(new ArrayComponent());
+      }
       
       return retVal;
+   }
+   
+   private boolean responseIsError(String respStr)
+   {
+      boolean isErr = false;
+      
+      if(respStr == null)
+      {
+         isErr = true;
+      }
+      
+      if(respStr.contains(SENSOR_ERROR_STR))
+      {
+         isErr = true;
+      }
+      
+      return isErr;
    }
    
    //--------------------------------------------------------------------------
 
    private static long DEFAULT_TIMEOUT = 5000;
+   private static String SENSOR_ERROR_STR = "No sensor type found for";
 }
