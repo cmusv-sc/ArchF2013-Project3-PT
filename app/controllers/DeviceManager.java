@@ -72,6 +72,13 @@ public class DeviceManager
       return deviceTypeList;
    }
 
+    public Set<SensorType> getSensorTypes(String deviceType) {
+        QueryDeviceArg query = new QueryDeviceArg(deviceType);
+        QueryRequest request = new QueryRequest();
+        QueryResponse response = request.getSensorTypes(query);
+        return makeSensorTypeSet(response);
+    }
+
    public List<SensorReading> getSensorReadings(Map<String, String> parameters)
    {
       String queryType = parameters.get(QUERY_TYPE);
@@ -131,6 +138,18 @@ public class DeviceManager
       }
       return deviceTypes;
    }
+
+    private Set<SensorType> makeSensorTypeSet(QueryResponse sensors) {
+        Set<SensorType> sensorTypes = new HashSet<SensorType>();
+        for (ResponseComponent sensor : sensors) {
+            CompositeComponent compNode = (CompositeComponent) sensor;
+            String sensorTypeTokenizedString = compNode.getValueAsString(SENSOR_TYPE);
+            if (sensorTypeTokenizedString != null && !sensorTypeTokenizedString.isEmpty()) {
+                sensorTypes = SensorType.parseSensorTypeList(sensorTypeTokenizedString);
+            }
+        }
+        return sensorTypes;
+    }
 
    private Set<DeviceType> addSensorTypes(QueryRequest request, Set<DeviceType> deviceTypes)
    {

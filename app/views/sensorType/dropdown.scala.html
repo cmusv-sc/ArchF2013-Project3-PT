@@ -1,0 +1,10 @@
+@(sensorTypes:java.util.Set[SensorType])
+
+@if(sensorTypes.isEmpty){
+    <option>No sensor types found</option>
+} else {
+    <option>Choose sensor type</option>
+    @for(sensorType <- sensorTypes){
+        <option value="@sensorType.getType()">@sensorType.getType()</option>
+    }
+}

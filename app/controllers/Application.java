@@ -68,7 +68,8 @@ public class Application extends Controller {
         response().setContentType("text/javascript");
         return ok(
             Routes.javascriptRouter("jsRoutes",
-                        routes.javascript.Devices.getDeviceTypes()
+                    routes.javascript.Devices.getDeviceTypes(),
+                    routes.javascript.Devices.getSensorTypes()
             )
         );
     }

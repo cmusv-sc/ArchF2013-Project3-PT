@@ -1,0 +1,10 @@
+@(deviceTypes:java.util.List[DeviceType])
+
+@if(deviceTypes.isEmpty) {
+    <option>No device types returned</option>
+} else {
+    <option>Choose device type</option>
+    @for(deviceType <- deviceTypes) {
+        <option value="@deviceType.getType()">@deviceType.getType()</option>
+    }
+}

@@ -4,15 +4,38 @@ $(function(){
             $('#metadataActivity').show();
         },
         success:function(data){
-            $('#deviceTypeContainer').html(data);
+            $('#deviceTypes').html(data);
+            $('#deviceTypes').attr('disabled', false);
         },
         error:function(jqxhr, code, msg){
-            $('#deviceTypeContainer').html(code);
+            $('#deviceTypes').html("<option>"+code+"</option>");
+            $('#deviceTypes').attr('disabled', true);
         },
         complete:function(){
             $('#metadataActivity').hide();
         }
 
     });
+    $('#deviceTypes').change(function () {
+        var selectedDeviceType = $('#deviceTypes').val();
+        jsRoutes.controllers.Devices.getSensorTypes(selectedDeviceType).ajax({
+            beforeSend: function () {
+                $('#metadataActivity').show();
+            },
+            success: function (data) {
+                $('#sensorTypes').html(data);
+                $('#sensorTypes').attr('disabled', false);
+            },
+            error: function (jqxhr, code, msg) {
+                $('#sensorTypes').html("<option>"+code+"</option>");
+                $('#sensorTypes').attr('disabled', true);
+            },
+            complete: function () {
+                $('#metadataActivity').hide();
+            }
+        });
+    });
 });
+
+
 
