@@ -112,8 +112,12 @@ public class DeviceManager
       for(ResponseComponent deviceNode: devices) 
       {
          CompositeComponent compNode = (CompositeComponent) deviceNode;
-         DeviceType device = new DeviceType(compNode.getValueAsString(DEVICE_TYPE));
-         deviceTypes.add(device);
+         String devType = compNode.getValueAsString(DEVICE_TYPE);
+         if(devType != null)
+         {
+            DeviceType device = new DeviceType(devType);
+            deviceTypes.add(device);
+         }
       }
       return deviceTypes;
    }
