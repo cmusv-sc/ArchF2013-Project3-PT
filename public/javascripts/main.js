@@ -1,13 +1,13 @@
 $(function(){
-    jsRoutes.controllers.Devices.index().ajax({
+    jsRoutes.controllers.Devices.getDeviceTypes().ajax({
         beforeSend: function(){
             $('#metadataActivity').show();
         },
         success:function(data){
-            $('#deviceDropdownContainer').html(data);
+            $('#deviceTypeContainer').html(data);
         },
         error:function(jqxhr, code, msg){
-            $('#deviceDropdownContainer').html(code);
+            $('#deviceTypeContainer').html(code);
         },
         complete:function(){
             $('#metadataActivity').hide();

@@ -1,9 +1,10 @@
-@(devices: java.util.List[Device])
+@(deviceTypes:java.util.List[DeviceType])
 
-@if(!devices.isEmpty) {
-    <select id="devices">
-    @for(device <- devices) {
-        <option value="@device.getDeviceId">@device.getDeviceId</option>
+@if(!deviceTypes.isEmpty) {
+    <label for="deviceTypes">Device Types</label>
+    <select id="deviceTypes" class="form-control">
+    @for(deviceTypes <- deviceTypes) {
+        <option value="@deviceTypes.getType()">@deviceTypes.getType()</option>
     }
     </select>
 }

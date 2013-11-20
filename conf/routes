@@ -7,7 +7,7 @@ GET        /                         controllers.Application.index()
 GET        /sensors                  controllers.Application.sensors()
 
 # Devices
-GET        /devices                  controllers.Devices.index()
+GET        /devices                  controllers.Devices.getDeviceTypes()
 
 
 

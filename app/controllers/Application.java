@@ -18,11 +18,6 @@ public class Application extends Controller {
     private static final String URL = "http://einstein.sv.cmu.edu/sensors";
 
     public static Result index() {
-        String message = "Dear World, Team Mercury says Hello!";
-        DeviceManager deviceManager = new DeviceManager();
-        List<Device> devices = null;
-//        devices = deviceManager.getDevices();
-//        return ok(index.render(devices));
         return ok(index.render());
     }
 
@@ -63,7 +58,6 @@ public class Application extends Controller {
             }
         });
 
-//        return ok(index.render("Results:", "hello"));
     }
 
     /**
@@ -74,7 +68,7 @@ public class Application extends Controller {
         response().setContentType("text/javascript");
         return ok(
             Routes.javascriptRouter("jsRoutes",
-                        routes.javascript.Devices.index()
+                        routes.javascript.Devices.getDeviceTypes()
             )
         );
     }

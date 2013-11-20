@@ -4,14 +4,33 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2 class="panel-title">
-                        Sensor Data
+                        Choose a device
                         <img id="metadataActivity" style="display: none;"
                             src="@routes.Assets.at("images/activity_indicator.gif")" width="20">
                     </h2>
 
                 </div>
-                <div id="deviceContainer" class="panel-body">
-                    <div id="deviceDropdownContainer"></div>
+                <div id="deviceMetaData" class="panel-body">
+                    <div class="row">
+                        <div id="deviceTypeContainer" class="col-md-4">
+                            <label for="deviceTypes">Device Type</label>
+                            <select id="deviceTypes" class="form-control" disabled>
+                                <option>Fetching Device Types...</option>
+                            </select>
+                        </div>
+                        <div id="sensorTypeContainer" class="col-md-4">
+                            <label for="sensorTypes">Sensor Type</label>
+                            <select id="sensorTypes" class="form-control" disabled>
+                                <option>Select Device Type</option>
+                            </select>
+                        </div>
+                        <div id="deviceIDContainer" class="col-md-4">
+                            <label for="deviceIDs">Device ID</label>
+                            <select id="deviceIDs" class="form-control" disabled>
+                                <option>Select Sensor Type</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

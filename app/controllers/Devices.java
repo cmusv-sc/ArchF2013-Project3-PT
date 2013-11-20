@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Device;
+import models.DeviceType;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -14,15 +15,15 @@ import java.util.List;
  */
 public class Devices extends Controller {
 
-    public static Result index() {
-        List<Device> devices = null;
+    public static Result getDeviceTypes() {
+        List<DeviceType> deviceTypes = null;
         try {
             DeviceManager deviceManager = new DeviceManager();
-            devices = deviceManager.getDevices();
+            deviceTypes = deviceManager.getDeviceTypes();
         } catch (Exception e) {
-            return ok(e.getMessage());
+            return badRequest(e.getMessage());
         }
-        return ok(views.html.device.dropdown.render(devices));
+        return ok(views.html.device.dropdown.render(deviceTypes));
 //        return ok("hello");
     }
 }
