@@ -1,4 +1,4 @@
-package controllers.query;
+package models.query;
 
 /**
  * Currently all the Query*Args are wrappers around string

@@ -1,8 +1,8 @@
 package controllers;
 
+import models.Device;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package controllers;
+package models;
 
 public class SensorType
 {
   private final String sensorType;
 
-  protected SensorType(String sensorType)
+  public SensorType(String sensorType)
   {
     this.sensorType = sensorType;
   }

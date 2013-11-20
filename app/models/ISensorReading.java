@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controllers;
+package models;
 
 /**
  * @author danny brown

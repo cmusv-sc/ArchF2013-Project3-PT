@@ -2,9 +2,7 @@ package controllers;
 
 import java.util.List;
 
-import controllers.query.QueryRequest;
-import controllers.query.QueryResponse;
-
+import models.Device;
 import play.*;
 import play.data.DynamicForm;
 import play.data.Form;

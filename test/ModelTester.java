@@ -1,7 +1,9 @@
 import java.lang.*;
-import java.io.*;
 
-import controllers.*;
+import models.Device;
+import models.DeviceType;
+import models.Sensor;
+import models.SensorReading;
 
 public class ModelTester
 {

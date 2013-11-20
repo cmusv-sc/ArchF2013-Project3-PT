@@ -1,12 +1,16 @@
 package controllers;
 
-import controllers.query.CompositeComponent;
-import controllers.query.QueryDeviceArg;
-import controllers.query.QueryRequest;
-import controllers.query.QueryResponse;
-import controllers.query.QuerySensorTypeArg;
-import controllers.query.QueryTimeArg;
-import controllers.query.ResponseComponent;
+import models.query.CompositeComponent;
+import models.query.QueryDeviceArg;
+import models.query.QueryRequest;
+import models.query.QueryResponse;
+import models.query.QuerySensorTypeArg;
+import models.query.QueryTimeArg;
+import models.query.ResponseComponent;
+import models.Device;
+import models.DeviceType;
+import models.SensorReading;
+import models.SensorType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,42 +67,42 @@ public class DeviceManager
       String queryType = parameters.get(QUERY_TYPE);
       QueryRequest request = new QueryRequest();
       QueryResponse response = null;
-      if (queryType.equals(LAST_READINGS))
-      {
-         QuerySensorTypeArg sensorType = 
-            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
-         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
-         response = request.getLastReadings(sensorType, time);
-      } 
-      else if (queryType.equals(LASTEST_READINGS))
-      {
-         QuerySensorTypeArg sensorType = 
-            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
-         response = request.getLastestReadings(sensorType);
-      } 
-      else if (queryType.equals(TIMEFRAME_READINGS))
-      {
-         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
-         QuerySensorTypeArg sensorType = 
-            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
-         QueryTimeArg startTime = new QueryTimeArg(parameters.get(START_TIME));
-         QueryTimeArg endTime = new QueryTimeArg(parameters.get(END_TIME));
-         response = request.getSensorReadingByTimeRange(device, sensorType,
-                                                        startTime, endTime);
-      } 
-      else if (queryType.equals(POINT_IN_TIME_READING))
-      {
-         QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
-         QuerySensorTypeArg sensorType = 
-            new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
-         QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
-         response = request.getSensorReadingByTimePoint(device, sensorType,
-                                                        time);
-      } 
-      else
-      {
-         throw new RuntimeException("Not a valid query");
-      }
+       switch (queryType) {
+           case LAST_READINGS: {
+               QuerySensorTypeArg sensorType =
+                       new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+               QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
+               response = request.getLastReadings(sensorType, time);
+               break;
+           }
+           case LASTEST_READINGS: {
+               QuerySensorTypeArg sensorType =
+                       new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+               response = request.getLastestReadings(sensorType);
+               break;
+           }
+           case TIMEFRAME_READINGS: {
+               QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
+               QuerySensorTypeArg sensorType =
+                       new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+               QueryTimeArg startTime = new QueryTimeArg(parameters.get(START_TIME));
+               QueryTimeArg endTime = new QueryTimeArg(parameters.get(END_TIME));
+               response = request.getSensorReadingByTimeRange(device, sensorType,
+                       startTime, endTime);
+               break;
+           }
+           case POINT_IN_TIME_READING: {
+               QueryDeviceArg device = new QueryDeviceArg(parameters.get(DEVICE_ID));
+               QuerySensorTypeArg sensorType =
+                       new QuerySensorTypeArg(parameters.get(SENSOR_TYPE));
+               QueryTimeArg time = new QueryTimeArg(parameters.get(TIMESTAMP));
+               response = request.getSensorReadingByTimePoint(device, sensorType,
+                       time);
+               break;
+           }
+           default:
+               throw new RuntimeException("Not a valid query");
+       }
       return makeSensorReadingList(response);
    }
 
@@ -140,7 +144,7 @@ public class DeviceManager
    private List<String> parseSensorTypesToList(String sensorTypesStr)
    {
       List<String> retList = Arrays.asList(sensorTypesStr.split(","));
-      
+
       return retList;
    }
    
