@@ -54,7 +54,7 @@ public class DeviceManager
       {
          CompositeComponent compNode = (CompositeComponent) deviceNode;
          Device device = new Device(compNode.getValueAsString(URI),
-                                    deviceTypeMap.get(compNode.get(DEVICE_TYPE)),
+                                    deviceTypeMap.get(compNode.getValueAsString(DEVICE_TYPE)),
                                     compNode.getValueAsString(DEVICE_AGENT),
                                     compNode.getValueAsString(DEVICE_LOCATION));
          devices.add(device);
@@ -68,8 +68,8 @@ public class DeviceManager
       QueryResponse deviceResp = request.getAllDevices();
       Set<DeviceType> deviceTypes = makeDeviceTypeSet(deviceResp);
       deviceTypes = addSensorTypes(request, deviceTypes);
-      List deviceTypeList = new ArrayList<DeviceType>(deviceTypes);
-      return deviceTypeList
+      List<DeviceType> deviceTypeList = new ArrayList<DeviceType>(deviceTypes);
+      return deviceTypeList;
    }
 
    public List<SensorReading> getSensorReadings(Map<String, String> parameters)
