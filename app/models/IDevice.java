@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controllers;
+package models;
 import java.lang.*;
 
 /**

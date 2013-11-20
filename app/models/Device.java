@@ -1,4 +1,6 @@
-package controllers;
+package models;
+
+import models.DeviceType;
 
 public class Device
 {

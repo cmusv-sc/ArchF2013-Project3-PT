@@ -1,4 +1,4 @@
-package controllers.query;
+package models.query;
 
 import java.util.Iterator;
 import java.util.Map;

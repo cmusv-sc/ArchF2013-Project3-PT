@@ -1,4 +1,4 @@
-package controllers.query;
+package models.query;
 
 /**
  * Representation of a query time argument

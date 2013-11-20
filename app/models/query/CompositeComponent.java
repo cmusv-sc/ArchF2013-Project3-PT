@@ -1,4 +1,4 @@
-package controllers.query;
+package models.query;
 
 import java.util.HashMap;
 

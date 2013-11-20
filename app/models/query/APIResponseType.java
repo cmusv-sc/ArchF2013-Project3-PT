@@ -1,4 +1,4 @@
-package controllers.query;
+package models.query;
 
 /**
  * Enum to hold mappings to Restful API response types

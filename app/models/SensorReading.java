@@ -1,6 +1,6 @@
-package controllers;
+package models;
 
-public class SensorReading implements ISensorReading{
+public class SensorReading implements ISensorReading {
 	public SensorReading(){};
 	public SensorReading(String deviceId,
 	  					 String sensorType,

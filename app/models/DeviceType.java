@@ -1,18 +1,18 @@
-package controllers;
+package models;
 
-import java.util.List; 
+import java.util.List;
 
 public class DeviceType 
 {
   private final String typeName;
-  private List<SensorType> sensors;  
+  private List<SensorType> sensors;
 
   public DeviceType(String typeName)
   {
     this.typeName = typeName;
   }
 
-  protected void add(SensorType sensorType)
+  public void add(SensorType sensorType)
   {
     sensors.add(sensorType);
   }
