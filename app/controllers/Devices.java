@@ -31,7 +31,7 @@ public class Devices extends Controller {
 
     public static Result getSensorTypes(String deviceType) {
         try {
-            Set<SensorType> sensorTypes = null;
+            List<SensorType> sensorTypes = null;
             DeviceManager deviceManager = new DeviceManager();
             sensorTypes = deviceManager.getSensorTypes(deviceType);
             return ok(views.html.sensorType.dropdown.render(sensorTypes));

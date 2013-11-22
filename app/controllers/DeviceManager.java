@@ -68,16 +68,81 @@ public class DeviceManager
       QueryResponse deviceResp = request.getAllDevices();
       Set<DeviceType> deviceTypes = makeDeviceTypeSet(deviceResp);
       deviceTypes = addSensorTypes(request, deviceTypes);
+      //take this to List so we can enforce an ordering on it
       List<DeviceType> deviceTypeList = new ArrayList<DeviceType>(deviceTypes);
+      java.util.Collections.sort(deviceTypeList);
       return deviceTypeList;
    }
 
-    public Set<SensorType> getSensorTypes(String deviceType) {
-        QueryDeviceArg query = new QueryDeviceArg(deviceType);
-        QueryRequest request = new QueryRequest();
-        QueryResponse response = request.getSensorTypes(query);
-        return makeSensorTypeSet(response);
-    }
+   /**
+    * Provide a reverse-lookup of DeviceType by sensor type
+    * (This is an example of how to implement this functionality. It can
+    * be improved a lot by storing the built reverse-map somewhere.)
+    * @param sensorType
+    * @param deviceTypeList - assumes we have access to the collection of all DeviceTypes 
+    * (This param can be removed if we get access to our built-up device types from a 
+    * cache or something.)
+    * @return List of DeviceTypes
+    * (I haven't had time to test this - but it should be good.)
+    */
+   public List<DeviceType> getDeviceTypes(SensorType sensorType, List<DeviceType> deviceTypeList)
+   {
+      //build the reverse mapping of SensorTypes to DeviceType
+      Map<SensorType, List<DeviceType>> revMap = makeSensorTypeToDeviceTypeMap(deviceTypeList);
+      List<DeviceType> dTypeList = revMap.get(sensorType);
+      java.util.Collections.sort(dTypeList);
+      return dTypeList;
+   }
+   
+   private Map<SensorType, List<DeviceType>> makeSensorTypeToDeviceTypeMap(List<DeviceType> deviceTypeList)
+   {
+      Map<SensorType, List<DeviceType>> revMap = new HashMap<SensorType, List<DeviceType>>();
+      for(DeviceType currDeviceType: deviceTypeList) 
+      {
+         List<SensorType> sTypeList = currDeviceType.getSensorTypes();
+         for(SensorType sType : sTypeList)
+         {
+            List<DeviceType> typeLookup = revMap.get(sType);
+            if(typeLookup == null)
+            {
+               typeLookup = new ArrayList<DeviceType>();
+               typeLookup.add(currDeviceType);
+            }
+            else
+            {
+               typeLookup.add(currDeviceType);               
+            }
+            revMap.put(sType, typeLookup);
+         }
+      }
+      return revMap;
+   }
+   
+   /**
+    * Stub method for getting a list of DeviceIds by sensorType
+    * (I ran out of time to implement this one - but the impl is similar to
+    * getDeviceType(SensorType) )
+    * @param sensorType
+    * @return list of device ids
+    */
+   public List<String> getDeviceIds(SensorType sensorType)
+   {
+      //stub for right now
+      List<String> idList = new ArrayList<String>();
+      return idList;
+   }
+   
+   public List<SensorType> getSensorTypes(String deviceType) 
+   {
+      QueryDeviceArg query = new QueryDeviceArg(deviceType);
+      QueryRequest request = new QueryRequest();
+      QueryResponse response = request.getSensorTypes(query);
+      Set<SensorType> sTypeSet = makeSensorTypeSet(response);
+      //take this to List so we can enforce an ordering on it
+      List<SensorType> sensorTypeList = new ArrayList<SensorType>(sTypeSet);
+      java.util.Collections.sort(sensorTypeList);
+      return sensorTypeList;
+   }
 
    public List<SensorReading> getSensorReadings(Map<String, String> parameters)
    {
@@ -139,17 +204,23 @@ public class DeviceManager
       return deviceTypes;
    }
 
-    private Set<SensorType> makeSensorTypeSet(QueryResponse sensors) {
-        Set<SensorType> sensorTypes = new HashSet<SensorType>();
-        for (ResponseComponent sensor : sensors) {
-            CompositeComponent compNode = (CompositeComponent) sensor;
-            String sensorTypeTokenizedString = compNode.getValueAsString(SENSOR_TYPE);
-            if (sensorTypeTokenizedString != null && !sensorTypeTokenizedString.isEmpty()) {
-                sensorTypes = SensorType.parseSensorTypeList(sensorTypeTokenizedString);
-            }
-        }
-        return sensorTypes;
-    }
+   private Set<SensorType> makeSensorTypeSet(QueryResponse sensors)
+   {
+      Set<SensorType> sensorTypes = new HashSet<SensorType>();
+      for (ResponseComponent sensor : sensors)
+      {
+         CompositeComponent compNode = (CompositeComponent) sensor;
+         String sensorTypeTokenizedString = compNode
+               .getValueAsString(SENSOR_TYPE);
+         if (sensorTypeTokenizedString != null
+               && !sensorTypeTokenizedString.isEmpty())
+         {
+            sensorTypes = SensorType
+                  .parseSensorTypeList(sensorTypeTokenizedString);
+         }
+      }
+      return sensorTypes;
+   }
 
    private Set<DeviceType> addSensorTypes(QueryRequest request, Set<DeviceType> deviceTypes)
    {
