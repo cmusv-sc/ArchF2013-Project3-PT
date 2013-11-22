@@ -157,7 +157,8 @@ public class DeviceManager
       for (DeviceType deviceType : deviceTypes)
       {
          QueryDeviceArg deviceTypeArg = new QueryDeviceArg(deviceType.getType());
-         sensorTypeResp = request.getSensorTypes(deviceTypeArg);
+         QueryRequest currRequest = new QueryRequest();
+         sensorTypeResp = currRequest.getSensorTypes(deviceTypeArg);
          
          for(ResponseComponent sTypeNode : sensorTypeResp)
          {
