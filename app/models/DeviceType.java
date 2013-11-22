@@ -3,7 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeviceType 
+public class DeviceType implements Comparable<DeviceType>
 {
   private final String typeName;
   private List<SensorType> sensors;
@@ -40,13 +40,22 @@ public class DeviceType
       {
          return false;
       }
-      DeviceType dt = (DeviceType)o;
+      DeviceType dt = (DeviceType) o;
       return typeName.equals(dt.typeName);
    }
-   
+
    @Override
    public int hashCode()
    {
       return typeName.hashCode();
+   }
+   
+   public int compareTo(DeviceType dType)
+   {
+      if (this.typeName != null && dType.typeName != null)
+      {
+         return this.typeName.compareToIgnoreCase(dType.typeName);
+      }
+      return 0;
    }
 }
