@@ -207,6 +207,6 @@ public class QueryRequest
    
    //--------------------------------------------------------------------------
 
-   private static long DEFAULT_TIMEOUT = 5000;
-   private static String SENSOR_ERROR_STR = "No sensor type found for";
+   private static final long DEFAULT_TIMEOUT = 5000;
+   private static final String SENSOR_ERROR_STR = "No sensor type found for";
 }
