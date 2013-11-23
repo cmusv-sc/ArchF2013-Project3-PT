@@ -1,4 +1,6 @@
 $(function(){
+    $('#fromTime').datetimepicker();
+    $('#toTime').datetimepicker();
     jsRoutes.controllers.Devices.getDeviceTypes().ajax({
         beforeSend: function(){
             $('#metadataActivity').show();
