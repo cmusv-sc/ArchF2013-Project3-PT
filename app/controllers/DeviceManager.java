@@ -117,7 +117,24 @@ public class DeviceManager
       }
       return revMap;
    }
-   
+
+   public List<String> getDeviceIds(DeviceType deviceType)
+   {
+      QueryRequest request = new QueryRequest();
+      QueryResponse deviceResp = request.getAllDevices();
+      List<String> idList = new ArrayList<String>();
+      for(ResponseComponent deviceNode: deviceResp) 
+      {
+         CompositeComponent compNode = (CompositeComponent) deviceNode;
+         String devType = compNode.getValueAsString(DEVICE_TYPE);
+         if (devType != null && devType.equals(deviceType.getType())) 
+         {
+            idList.add(devType);
+         }
+      }
+      return idList;
+   }
+
    /**
     * Stub method for getting a list of DeviceIds by sensorType
     * (I ran out of time to implement this one - but the impl is similar to
@@ -127,8 +144,15 @@ public class DeviceManager
     */
    public List<String> getDeviceIds(SensorType sensorType)
    {
-      //stub for right now
+      List<Device> devices = getDevices()
       List<String> idList = new ArrayList<String>();
+      for(Device device: devices)
+      {
+         if (device.getDeviceType().getSensorTypes().contains(sensorType))
+         {
+            idlist.add(device.getDeviceId());
+         }
+      }
       return idList;
    }
    
