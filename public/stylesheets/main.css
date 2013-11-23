@@ -1,0 +1,30 @@
+#header {
+	padding-top: 10px;
+	height: 100px;
+}
+
+#menuInHeader {
+	margin-top: 70px:
+}
+
+.navbar.navbar-inverse {
+    background-color: #85000A;
+	padding: 0 20px;
+}
+
+.navbar.navbar-inverse a:link;{
+    color: white;
+}
+
+h5 a:link{
+	color: white;
+}
+
+h5 a:hover{
+	color: rgb(42, 100, 150);
+	
+}
+
+.title-link.h3 a {
+	color: white;
+}

@@ -144,13 +144,13 @@ public class DeviceManager
     */
    public List<String> getDeviceIds(SensorType sensorType)
    {
-      List<Device> devices = getDevices()
+      List<Device> devices = getDevices();
       List<String> idList = new ArrayList<String>();
       for(Device device: devices)
       {
          if (device.getDeviceType().getSensorTypes().contains(sensorType))
          {
-            idlist.add(device.getDeviceId());
+            idList.add(device.getDeviceId());
          }
       }
       return idList;
