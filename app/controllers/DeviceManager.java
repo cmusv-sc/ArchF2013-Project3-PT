@@ -150,7 +150,7 @@ public class DeviceManager
       {
          if (device.getDeviceType().getSensorTypes().contains(sensorType))
          {
-//            idlist.add(device.getDeviceId());
+            idList.add(device.getDeviceId());
          }
       }
       return idList;
