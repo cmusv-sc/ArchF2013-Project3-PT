@@ -5,6 +5,7 @@
 
 #menuInHeader {
 	margin-top: 70px:
+	color: white;
 }
 
 .navbar.navbar-inverse {
@@ -21,8 +22,11 @@ h5 a:link{
 }
 
 h5 a:hover{
-	color: rgb(42, 100, 150);
-	
+	color: white;	
+}
+
+h5 a:visited{
+	color: white;	
 }
 
 .title-link.h3 a {
