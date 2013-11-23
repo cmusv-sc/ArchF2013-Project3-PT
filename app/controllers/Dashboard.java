@@ -19,9 +19,7 @@ public class Dashboard extends Controller {
     public static Result getSensorTypesAndDeviceId(String deviceType) {
         DeviceManager deviceManager = new DeviceManager();
         List<String> deviceIds = deviceManager.getDeviceIds(new DeviceType(deviceType));
-        System.out.println("Device Ids: " + deviceIds.toString());
         List<SensorType> sensorTypes = deviceManager.getSensorTypes(deviceType);
-        System.out.println("Sensor Types: " + sensorTypes.toString());
         return ok(views.html.metadata.sensorTypes.render(sensorTypes, deviceIds));
     }
 }
