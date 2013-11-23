@@ -1,4 +1,4 @@
-name := "HelloWorldApp"
+name := "mercury"
 
 version := "1.0-SNAPSHOT"
 

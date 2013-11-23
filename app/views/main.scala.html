@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/main.js")"></script>
         <script type="text/javascript" src="@routes.Application.javascriptRoutes()"></script>
     </head>
     <body>
@@ -20,7 +21,7 @@
 	          <a href="/">Carnegie Mellon University Silicon Valley</a>
 	        </h3>
 	      </div>
-	      <div class="actions pull-right">
+	      <div class="actions pull-right" id="menuInHeader">
 	        <h5>
 	          <a href="/dashboard">Dashboard</a> |
 	          <a href="/sensors">Sensors</a> |
@@ -33,6 +34,10 @@
 	      </div>
 	    </div>
 	  </header>	
+	  <div class id="hero">
+	    <img alt="Build23" src="/assets/build23-c9270cf9e1aac470c29e951b22ff622d.png" width="500" />
+	    <img alt="Ff" src="/assets/ff-caeffaec13dcced378179c276515209d.jpg" width="500" />
+	  </div>
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Sensor Query</a>
@@ -40,7 +45,7 @@
             </div>
 
         </nav>
-        <div>
+        <div class="container">
             <!-- Content goes in here -->
             @content
             <!-- Content goes in here -->
