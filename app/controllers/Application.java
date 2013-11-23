@@ -70,7 +70,8 @@ public class Application extends Controller {
         return ok(
             Routes.javascriptRouter("jsRoutes",
                     routes.javascript.Devices.getDeviceTypes(),
-                    routes.javascript.Devices.getSensorTypes()
+                    routes.javascript.Devices.getSensorTypes(),
+                    routes.javascript.Dashboard.getSensorTypesAndDeviceId()
             )
         );
     }

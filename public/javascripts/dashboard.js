@@ -16,19 +16,18 @@ $(function(){
         }
 
     });
+
     $('#deviceTypes').change(function () {
         var selectedDeviceType = $('#deviceTypes').val();
-        jsRoutes.controllers.Devices.getSensorTypes(selectedDeviceType).ajax({
+        jsRoutes.controllers.Dashboard.getSensorTypesAndDeviceId(selectedDeviceType).ajax({
             beforeSend: function () {
                 $('#metadataActivity').show();
             },
-            success: function (data) {
-                $('#sensorTypes').html(data);
-                $('#sensorTypes').attr('disabled', false);
+            success: function(data){
+                $('#sensorTypeContainer').html(data);
             },
             error: function (jqxhr, code, msg) {
-                $('#sensorTypes').html("<option>"+code+"</option>");
-                $('#sensorTypes').attr('disabled', true);
+                $('#sensorTypeContainer').html(code);
             },
             complete: function () {
                 $('#metadataActivity').hide();

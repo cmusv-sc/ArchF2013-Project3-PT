@@ -34,7 +34,8 @@ public class Devices extends Controller {
             List<SensorType> sensorTypes = null;
             DeviceManager deviceManager = new DeviceManager();
             sensorTypes = deviceManager.getSensorTypes(deviceType);
-            return ok(views.html.sensorType.dropdown.render(sensorTypes));
+//            return ok(views.html.sensorType.dropdown.render(sensorTypes));
+            return ok();
         } catch (Exception e) {
             e.printStackTrace();
             return badRequest();
