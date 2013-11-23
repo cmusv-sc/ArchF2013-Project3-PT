@@ -62,4 +62,12 @@ public class SensorType implements Comparable<SensorType>
       }
       return 0;
    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("SensorType{");
+        sb.append("sensorType='").append(sensorType).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

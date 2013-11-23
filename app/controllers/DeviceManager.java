@@ -126,8 +126,10 @@ public class DeviceManager
       for(ResponseComponent deviceNode: deviceResp) 
       {
          CompositeComponent compNode = (CompositeComponent) deviceNode;
-         String deviceId = compNode.getValueAsString(DEVICE_ID);
-         if (deviceId != null && deviceId.equals(deviceType.getType()))
+         String devType = compNode.getValueAsString(DEVICE_TYPE);
+         String deviceId = compNode.getValueAsString(URI);
+         if (devType != null && devType.equals(deviceType.getType())
+                 && deviceId != null && !deviceId.isEmpty())
          {
             idList.add(deviceId);
          }
