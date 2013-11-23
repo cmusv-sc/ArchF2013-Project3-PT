@@ -1,5 +1,8 @@
 package models.query;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Builder class for API requests
  * @author geoffschaeffer
@@ -35,13 +38,28 @@ class APIRequestBuilder
    protected void addDeviceArg(QueryDeviceArg arg)
    {
       bldr.append(URL_SEP);
-      bldr.append(arg.toString());
+      bldr.append(urlEncodeArg(arg.toString()));
    }
    
    protected void addSensorTypeArg(QuerySensorTypeArg arg)
    {
       bldr.append(URL_SEP);
-      bldr.append(arg.toString());
+      bldr.append(urlEncodeArg(arg.toString()));
+   }
+   
+   private String urlEncodeArg(String argString)
+   {
+      String encodeStr = null;
+      try
+      {
+         encodeStr = URLEncoder.encode(argString, "UTF-8");
+      }
+      catch(UnsupportedEncodingException uee)
+      {
+         //make it barf later on a badly encoded string
+         encodeStr = argString;
+      }
+      return encodeStr;
    }
    
    public String toString()
