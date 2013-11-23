@@ -26,7 +26,6 @@ public class Devices extends Controller {
             return badRequest(e.getMessage());
         }
         return ok(views.html.deviceType.dropdown.render(deviceTypes));
-//        return ok("hello");
     }
 
     public static Result getSensorTypes(String deviceType) {
