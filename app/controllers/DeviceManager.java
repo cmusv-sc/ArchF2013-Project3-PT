@@ -144,14 +144,15 @@ public class DeviceManager
     */
    public List<String> getDeviceIds(SensorType sensorType)
    {
-      List<DeviceType> deviceTypes = getDeviceTypes();
-      Map<SensorType, List<DeviceType>> sTypeMap = makeSensorTypeToDeviceTypeMap(deviceTypes);
-      List<DeviceType> filteredDeviceTypes = sTypeMap.get(sensorType);
+      List<Device> devices = getDevices()
       List<String> idList = new ArrayList<String>();
-      for(DeviceType deviceType: filteredDeviceTypes)
+      for(Device device: devices)
       {
-         idList.addAll(getDeviceIds(deviceType));
-      }      
+         if (device.getDeviceType().getSensorTypes().contains(sensorType))
+         {
+            idlist.add(device.getDeviceId());
+         }
+      }
       return idList;
    }
    
