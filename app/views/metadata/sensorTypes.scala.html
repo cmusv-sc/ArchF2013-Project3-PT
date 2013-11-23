@@ -1,0 +1,26 @@
+@(sensorTypeList:java.util.List[SensorType],deviceIds:java.util.List[String])
+
+<label for="sensorType">Sensor Type</label>
+<select id="sensorType">
+    @if(sensorTypeList.isEmpty){
+        <option value="">No sensor types returned</option>
+    } else {
+        <option>Choose sensor type</option>
+        @for(sensorType <- sensorTypeList){
+            <option value="@sensorType.getType()">@sensorType.getType()</option>
+        }
+    }
+</select>
+
+<label for="deviceId">Device ID</label>
+<select id="deviceId">
+    @if(deviceIds.isEmpty){
+        <option value="">No device Id returned</option>
+    } else {
+        <option>Choose sensor type</option>
+        @for(deviceId <- deviceIds){
+            <option value="@deviceId">@deviceId</option>
+        }
+    }
+</select>
+

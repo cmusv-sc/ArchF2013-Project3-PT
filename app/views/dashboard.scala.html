@@ -1,0 +1,47 @@
+@main("Sensor Dashboard") {
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Filters
+                        <img id="metadataActivity" style="display: none;"
+                            src="@routes.Assets.at("images/activity_indicator.gif")" width="20">
+                    </div>
+                    <div id="deviceMetaData" class="panel-body">
+                        <div id="deviceTypeContainer">
+                            <label for="deviceTypes">Device Type</label>
+                            <select id="deviceTypes" class="form-control" disabled>
+                                <option>Fetching Device Types...</option>
+                            </select>
+                        </div>
+                        <div id="sensorTypeContainer">
+                            <label for="sensorTypes">Sensor Type</label>
+                            <select id="sensorTypes" class="form-control" disabled>
+                                <option>Select Device Type first</option>
+                            </select>
+
+                            <label for="deviceIDs">Device ID</label>
+                            <select id="deviceIDs" class="form-control" disabled>
+                                <option>Select Sensor Type first</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Chart
+                    </div>
+                    <div class="panel-body">
+                        TODO: chart
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/dashboard.js")"></script>
+}

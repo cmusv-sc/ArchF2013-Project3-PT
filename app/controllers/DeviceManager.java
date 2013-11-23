@@ -126,10 +126,10 @@ public class DeviceManager
       for(ResponseComponent deviceNode: deviceResp) 
       {
          CompositeComponent compNode = (CompositeComponent) deviceNode;
-         String devType = compNode.getValueAsString(DEVICE_TYPE);
-         if (devType != null && devType.equals(deviceType.getType())) 
+         String deviceId = compNode.getValueAsString(DEVICE_ID);
+         if (deviceId != null && deviceId.equals(deviceType.getType()))
          {
-            idList.add(devType);
+            idList.add(deviceId);
          }
       }
       return idList;
@@ -272,9 +272,12 @@ public class DeviceManager
 
    private List<String> parseSensorTypesToList(String sensorTypesStr)
    {
-      List<String> retList = Arrays.asList(sensorTypesStr.split(","));
+       List<String> retList = new ArrayList<String>();
+       if (sensorTypesStr != null && !sensorTypesStr.isEmpty()) {
+           retList = Arrays.asList(sensorTypesStr.split(","));
+       }
 
-      return retList;
+       return retList;
    }
    
    private Map<String, DeviceType> makeDeviceTypeMap(Set<DeviceType> deviceTypes)
