@@ -10,6 +10,7 @@ import play.libs.F.*;
 import play.libs.WS;
 import play.mvc.*;
 
+import views.html.dashboard;
 import views.html.index;
 
 public class Application extends Controller {
@@ -75,5 +76,7 @@ public class Application extends Controller {
     }
 
 
-
+    public static Result dashboard() {
+        return Results.ok(dashboard.render());
+    }
 }

@@ -3,17 +3,22 @@
 # ~~~~
 
 # Home page
-GET        /                               controllers.Application.index()
-GET        /sensors                        controllers.Application.sensors()
+GET        /                                      controllers.Application.index()
+GET        /sensors                               controllers.Application.sensors()
+
+# Dashboard
+GET        /dashboard                             controllers.Application.dashboard()
+GET        /getDeviceMetadata/:deviceType                     controllers.Dashboard.getSensorTypesAndDeviceId(deviceType: String)
 
 # Devices
-GET        /deviceTypes                    controllers.Devices.getDeviceTypes()
-GET        /sensorTypes/:deviceType        controllers.Devices.getSensorTypes(deviceType: String)
+GET        /deviceTypes                           controllers.Devices.getDeviceTypes()
+#GET        /devices/deviceType/:deviceType        controllers.Devices.getDeviceTypes()
+GET        /sensorTypes/:deviceType               controllers.Devices.getSensorTypes(deviceType: String)
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file                   controllers.Assets.at(path="/public", file)
+GET        /assets/*file                          controllers.Assets.at(path="/public", file)
 
 # Javascript Routing
-GET        /javascriptsRoutes              controllers.Application.javascriptRoutes()
+GET        /javascriptsRoutes                     controllers.Application.javascriptRoutes()
 
 
