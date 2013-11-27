@@ -1,11 +1,13 @@
+body { padding-top: 70px; }
+
 #menuInHeader {
   margin-top: 20px;
   color: white;
 }
 
-.navbar.navbar-inverse {
+.cmu-red {
   background-color: #85000A;
-  padding: 2px 20px;
+  /*padding: 2px 20px;*/
 }
 
 .navbar.navbar-inverse a:link;{

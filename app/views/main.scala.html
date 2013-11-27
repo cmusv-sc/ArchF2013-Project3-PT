@@ -1,7 +1,6 @@
 @(title: String)(content: Html)
 
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>@title</title>
@@ -16,14 +15,15 @@
         <script type="text/javascript" src="@routes.Application.javascriptRoutes()"></script>
     </head>
     <body>
-	  <header class="navbar navbar-inverse navbar-fixed-top">
-	    <div class="inner">
-	      <div class="pull-left">
+	  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	    <div class="row cmu-red">
+	      <div class="container">
+	      <div class="navbar-left">
 	        <h3 class="title-link">
 	          <a href="/">Carnegie Mellon University Silicon Valley</a>
 	        </h3>
 	      </div>
-	      <div class="actions pull-right" id="menuInHeader">
+	      <div class="actions navbar-right" id="menuInHeader">
 	        <h5>
 	          <a href="/dashboard">Dashboard</a> |
 	          <a href="/sensors">Sensors</a> |
@@ -34,15 +34,9 @@
 	            <a href="/users/sign_in">Log In</a>
 	        </h5>
 	      </div>
+	      </div>
 	    </div>
-	  </header> 
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Sensor Query</a>
-                <p class="navbar-text navbar-right">Carnegie Mellon University - Silicon Valley</p>
-            </div>
-
-        </nav>
+	  </nav> 
         <div class="container">
             <!-- Content goes in here -->
             @content
