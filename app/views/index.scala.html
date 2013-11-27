@@ -1,81 +1,12 @@
 @main("Team Mercury") {
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">
-                        Choose a device
-                        <img id="metadataActivity" style="display: none;"
-                            src="@routes.Assets.at("images/activity_indicator.gif")" width="20">
-                    </h2>
-
-                </div>
-                <div id="deviceMetaData" class="panel-body">
-                    <div class="row">
-                        <div id="deviceTypeContainer" class="col-md-4">
-                            <label for="deviceTypes">Device Type</label>
-                            <select id="deviceTypes" class="form-control" disabled>
-                                <option>Fetching Device Types...</option>
-                            </select>
-                        </div>
-                        <div id="sensorTypeContainer" class="col-md-4">
-                            <label for="sensorTypes">Sensor Type</label>
-                            <select id="sensorTypes" class="form-control" disabled>
-                                <option>Select Device Type first</option>
-                            </select>
-                        </div>
-                        <div id="deviceIDContainer" class="col-md-4">
-                            <label for="deviceIDs">Device ID</label>
-                            <select id="deviceIDs" class="form-control" disabled>
-                                <option>Select Sensor Type first</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel-group" id="search_criteria">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#search_criteria" href="#criterion1">
-                                Choose Device Type
-                            </a>
-                        </h3>
-                    </div>
-                    <div id="criterion1" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                        @helper.form(action = routes.Application.sensors()){
-                            <label for="id">Sensor Id</label>
-                            <input type="text" name="id" value="10170102">
-
-                            <label for="timestamp">Timestamp</label>
-                            <input type="text" name="timestamp" value="1368568896000">
-
-                            <label for="sensorType">Sensor Type</label>
-                            <input type="text" name="sensorType" value="temp">
-
-                            <label for="reportType">Report Type</label>
-                            <input type="text" name="reportType" value="json">
-
-                            <input type="submit" value="Submit">
-
-                        }
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-
-
-
-
+<div class="jumbotron">
+  <div class="row center-block">
+    <img alt="Building23" src="@routes.Assets.at("images/cmusv.png")" width="500" class="pull-left">
+    <img alt="Ff" src="@routes.Assets.at("images/sensor.jpg")" width="500" class="pull-right">
+  </div>
+  <br>
+  <div class="row">
+    <p class="lead text-center"><strong>A Federated Cloud Platform for Mobile Data-Centric Service Development and Sharing</strong></p>
+  </div>
+</div>
 }
