@@ -40,4 +40,16 @@ public class Devices extends Controller {
             return badRequest();
         }
     }
+
+     public static Result getDevices() {
+        List<Device> devices = null;
+        try {
+            DeviceManager deviceManager = new DeviceManager();
+            devices = deviceManager.getDevices();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+        return ok(views.html.devices.table.render(devices));
+    }
 }

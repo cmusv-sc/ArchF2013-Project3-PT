@@ -5,6 +5,7 @@
 # Home page
 GET        /                                               controllers.Application.index()
 GET        /sensors                                        controllers.Application.sensors()
+GET        /sensors/devices                                controllers.Devices.getDevices()
 
 # Dashboard
 GET        /dashboard                                      controllers.Application.dashboard()

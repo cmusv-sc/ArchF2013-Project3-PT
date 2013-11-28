@@ -34,6 +34,7 @@ public class Application extends Controller {
             Routes.javascriptRouter("jsRoutes",
                     routes.javascript.Devices.getDeviceTypes(),
                     routes.javascript.Devices.getSensorTypes(),
+                    routes.javascript.Devices.getDevices(),
                     routes.javascript.Dashboard.getSensorTypesAndDeviceId()
             )
         );

@@ -1,0 +1,22 @@
+@(devices:java.util.List[Device])
+
+@if(devices.isEmpty) {
+    <p>No sensor data available at this time. Please try again.</p>
+} else {
+    <table class="table table-striped">
+      <tr>
+        <th>Parent Device ID</th>
+        <th>Device Type</th>
+        <th>Sensor Type</th>
+      </tr>
+      @for(device <- devices) {
+        @for(sensorType <- device.getDeviceType().getSensorTypes() if (device.getDeviceType() != null && device.getDeviceType().getSensorTypes() != null)) {
+        <tr>
+          <td>@device.getDeviceId()</td>
+          <td>@device.getDeviceType().getType()</td>
+          <td>@sensorType.getType()</td>
+        </tr>
+        }
+      }
+    </table>
+}

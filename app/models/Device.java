@@ -27,6 +27,9 @@ public class Device
 
    public DeviceType getDeviceType()
    {
+      if (deviceType == null) {
+        return new DeviceType("none");
+      }
       return deviceType;
    }
 
