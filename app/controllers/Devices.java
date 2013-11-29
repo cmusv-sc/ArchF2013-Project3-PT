@@ -64,4 +64,16 @@ public class Devices extends Controller {
         }
         return ok(views.html.devices.devicelist.render(devices));
     }
+
+    public static Result getDeviceAgents() {
+    List<String> deviceAgents = null;
+        try {
+            DeviceManager deviceManager = new DeviceManager();
+            deviceAgents = deviceManager.getDeviceAgents();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+        return ok(views.html.devices.deviceagentlist.render(deviceAgents));
+    }
 }

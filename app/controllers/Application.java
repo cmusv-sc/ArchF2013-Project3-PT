@@ -11,6 +11,7 @@ import play.libs.WS;
 import play.mvc.*;
 
 import views.html.dashboard;
+import views.html.deviceagents;
 import views.html.devicelist;
 import views.html.index;
 import views.html.sensors;
@@ -33,9 +34,10 @@ public class Application extends Controller {
         response().setContentType("text/javascript");
         return ok(
             Routes.javascriptRouter("jsRoutes",
+                    routes.javascript.Devices.getDeviceAgents(),
+                    routes.javascript.Devices.getDevices(),
                     routes.javascript.Devices.getDeviceTypes(),
                     routes.javascript.Devices.getSensorTypes(),
-                    routes.javascript.Devices.getDevices(),
                     routes.javascript.Dashboard.getSensorTypesAndDeviceId()
             )
         );
@@ -48,5 +50,9 @@ public class Application extends Controller {
 
     public static Result devices() {
         return Results.ok(devicelist.render());
+    }
+
+    public static Result deviceAgents() {
+        return Results.ok(deviceagents.render());
     }
 }

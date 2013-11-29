@@ -14,6 +14,8 @@ GET        /devices                                        controllers.Applicati
 GET        /deviceTypes                                    controllers.Devices.getDeviceTypes()
 #GET        /devices/deviceType/:deviceType        controllers.Devices.getDeviceTypes()
 GET        /sensorTypes/:deviceType                        controllers.Devices.getSensorTypes(deviceType: String)
+GET        /device_agents                                  controllers.Application.deviceAgents()
+GET        /device_agents/deviceAgents                     controllers.Devices.getDeviceAgents()
 
 # Sensors
 GET        /sensors                                        controllers.Application.sensors()

@@ -214,6 +214,18 @@ public class DeviceManager
       return makeSensorReadingList(response);
    }
 
+   public List<String> getDeviceAgents()
+   {
+      List<Device> devices = getDevices();
+      Set<String> deviceAgentSet = new HashSet<String>();
+      for(Device device: devices)
+      {
+         deviceAgentSet.add(device.getDeviceAgent());
+      }
+      List<String> deviceAgents = new ArrayList(deviceAgentSet);
+      return deviceAgents;
+   }
+
    private Set<DeviceType> makeDeviceTypeSet(QueryResponse devices) 
    {
       Set<DeviceType> deviceTypes = new HashSet<DeviceType>();
