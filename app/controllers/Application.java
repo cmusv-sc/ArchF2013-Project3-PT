@@ -15,6 +15,7 @@ import views.html.deviceagents;
 import views.html.devicelist;
 import views.html.index;
 import views.html.sensors;
+import views.html.sensortypes;
 
 public class Application extends Controller {
 
@@ -34,6 +35,7 @@ public class Application extends Controller {
         response().setContentType("text/javascript");
         return ok(
             Routes.javascriptRouter("jsRoutes",
+                    routes.javascript.Devices.getAllSensorTypes(),
                     routes.javascript.Devices.getDeviceAgents(),
                     routes.javascript.Devices.getDevices(),
                     routes.javascript.Devices.getDeviceTypes(),
@@ -54,5 +56,9 @@ public class Application extends Controller {
 
     public static Result deviceAgents() {
         return Results.ok(deviceagents.render());
+    }
+
+    public static Result sensorTypes() {
+        return Results.ok(sensortypes.render());
     }
 }

@@ -76,4 +76,16 @@ public class Devices extends Controller {
         }
         return ok(views.html.devices.deviceagentlist.render(deviceAgents));
     }
+
+    public static Result getAllSensorTypes() {
+    List<String> sensorTypes = null;
+    try {
+            DeviceManager deviceManager = new DeviceManager();
+            sensorTypes = deviceManager.getAllSensorTypes();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+        return ok(views.html.sensorType.sensortypelist.render(sensorTypes));
+    }
 }
