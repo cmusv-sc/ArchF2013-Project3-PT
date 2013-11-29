@@ -25,6 +25,9 @@ GET        /sensors/devices                                controllers.Devices.g
 GET        /sensor_types                                   controllers.Application.sensorTypes()
 GET        /sensor_types/allSensorTypes                    controllers.Devices.getAllSensorTypes()
 
+# DeviceTypes
+GET        /device_types                                   controllers.Application.deviceTypes()
+GET        /device_types/deviceTypeList                    controllers.Devices.getDeviceTypeList()
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file                                   controllers.Assets.at(path="/public", file)
 
