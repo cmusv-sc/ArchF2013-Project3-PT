@@ -11,6 +11,7 @@ import play.libs.WS;
 import play.mvc.*;
 
 import views.html.dashboard;
+import views.html.devicelist;
 import views.html.index;
 import views.html.sensors;
 
@@ -43,5 +44,9 @@ public class Application extends Controller {
 
     public static Result dashboard() {
         return Results.ok(dashboard.render());
+    }
+
+    public static Result devices() {
+        return Results.ok(devicelist.render());
     }
 }

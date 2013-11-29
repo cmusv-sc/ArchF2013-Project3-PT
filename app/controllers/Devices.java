@@ -41,7 +41,7 @@ public class Devices extends Controller {
         }
     }
 
-     public static Result getDevices() {
+     public static Result getSensors() {
         List<Device> devices = null;
         try {
             DeviceManager deviceManager = new DeviceManager();
@@ -50,6 +50,18 @@ public class Devices extends Controller {
             e.printStackTrace();
             return badRequest(e.getMessage());
         }
-        return ok(views.html.devices.table.render(devices));
+        return ok(views.html.devices.sensorlist.render(devices));
+    }
+
+    public static Result getDevices() {
+        List<Device> devices = null;
+        try {
+            DeviceManager deviceManager = new DeviceManager();
+            devices = deviceManager.getDevices();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+        return ok(views.html.devices.devicelist.render(devices));
     }
 }
