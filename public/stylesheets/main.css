@@ -32,3 +32,19 @@ h3.title-link a {
 h3.title-link a:hover {
   text-decoration:none;
 }
+
+.featuresAndFunctionality h3{
+	text-align: center;
+	color: #85000A;
+}
+
+.featuresAndFunctionality p{
+	font-size: 16px;
+}
+
+#firstRowOnHomePage{
+	margin-top: -40px;
+}
+#lastRowOnHomePage {
+	padding-bottom: 100px;
+}
