@@ -32,3 +32,17 @@ h5 a:visited{
 .title-link.h3 a {
 	color: white;
 }
+
+#cmuBanner img {
+	width: 100%;
+	height: auto;
+}
+
+#sampleSensor img {
+	width: 100%;
+	height: auto;
+}
+
+#homePageSpacer {
+	height: 120px;
+}

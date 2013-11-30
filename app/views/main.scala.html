@@ -36,10 +36,6 @@
 	      </div>
 	    </div>
 	  </header>	
-	  <div class id="hero">
-	    <img alt="Build23" src="/assets/build23-c9270cf9e1aac470c29e951b22ff622d.png" width="500" />
-	    <img alt="Ff" src="/assets/ff-caeffaec13dcced378179c276515209d.jpg" width="500" />
-	  </div>
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Sensor Query</a>
@@ -48,6 +44,15 @@
 
         </nav>
         <div class="container">
+			<div id="homePageSpacer"></div>
+			<div class="row">
+				<div class="col-xs-8 col-md-8 col-lg-8" id="sampleSensor">
+					<img src="@routes.Assets.at("images/cmu_banner.jpg")" alt="Cmu Banner"/>
+				</div>
+				<div class="col-xs-4 col-md-4 col-lg-4" id="cmuBanner">
+					<img src="@routes.Assets.at("images/sensor.jpg")" alt="Sample Sensor" title="Sample Sensor Device"/>
+				</div>				
+			</div>
             <!-- Content goes in here -->
             @content
             <!-- Content goes in here -->
