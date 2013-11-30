@@ -30,20 +30,10 @@ public class Sensor implements ISensor
    {
       return deviceType;
    }
-
-   public void setDeviceType(String deviceType)
-   {
-      this.deviceType = deviceType;
-   }
  
    public String getSensorType()
    {
       return sensorType;
-   }
-
-   public void setSensorType(String sensorType)
-   {
-      this.sensorType = sensorType;
    }
 
    @Override

@@ -2,13 +2,26 @@ package models;
 
 import models.DeviceType;
 
-public class Device
+/**
+ * Representation of a Device
+ * Device is expected to contain a unique ID, a type,
+ * an agent, and a location
+ * @author Team Mercury
+ */
+public class Device implements IDevice
 {
    private final String deviceId;
    private final DeviceType deviceType;
    private final String deviceAgent;
    private final String deviceLocation;
 
+   /**
+    * Device constructor - takes all the info a Device requires
+    * @param deviceId
+    * @param deviceType
+    * @param deviceAgent
+    * @param deviceLocation
+    */
    public Device(String deviceId, 
                  DeviceType deviceType, 
                  String deviceAgent,
