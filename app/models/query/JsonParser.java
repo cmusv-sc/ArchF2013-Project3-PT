@@ -7,7 +7,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Helper class to parse Json into ResponseComponents
- * @author geoffschaeffer
+ * 
+ * ResponseComponents use the Composite pattern to deal with
+ * API responses in a general fashion.
+ * 
+ * If the API stops communicating in JSON, the response could still
+ * be converted into a collection of ResponseComponents, ensuring that
+ * downstream classes would not have to change (mostly QueryResponse).
+ * 
+ * @author Team Mercury
  */
 class JsonParser 
 {

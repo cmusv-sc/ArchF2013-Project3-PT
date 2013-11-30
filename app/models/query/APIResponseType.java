@@ -2,7 +2,7 @@ package models.query;
 
 /**
  * Enum to hold mappings to Restful API response types
- * @author geoffschaeffer
+ * @author Team Mercury
  */
 enum APIResponseType
 {

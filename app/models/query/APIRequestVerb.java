@@ -2,7 +2,7 @@ package models.query;
 
 /**
  * Enum to hold mappings to Restful API verbs
- * @author geoffschaeffer
+ * @author Team Mercury
  */
 enum APIRequestVerb
 {

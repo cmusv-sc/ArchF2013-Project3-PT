@@ -1,8 +1,8 @@
 package models.query;
 
 /**
- * Representation of a query sensor type argument
- * @author geoffschaeffer
+ * Representation of an API query sensor type argument
+ * @author Team Mercury
  */
 public class QuerySensorTypeArg extends QueryArg
 {   

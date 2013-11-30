@@ -1,8 +1,8 @@
 package models.query;
 
 /**
- * Representation of a query device argument
- * @author geoffschaeffer
+ * Representation of an API query device argument
+ * @author Team Mercury
  */
 public class QueryDeviceArg extends QueryArg
 {   

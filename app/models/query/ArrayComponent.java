@@ -6,7 +6,11 @@ import java.util.List;
 
 /**
  * ResponseComponent that represents an Array of components
- * @author geoffschaeffer
+ * 
+ * ResponseComponents use the Composite pattern to deal with
+ * API responses in a general fashion.
+ * 
+ * @author Team Mercury
  */
 public class ArrayComponent extends ResponseComponent implements Iterable<ResponseComponent>
 {

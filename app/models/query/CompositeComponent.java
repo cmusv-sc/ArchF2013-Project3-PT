@@ -4,7 +4,11 @@ import java.util.HashMap;
 
 /**
  * ResponseComponent that represents a key->value mapping
- * @author geoffschaeffer
+ * 
+ * ResponseComponents use the Composite pattern to deal with
+ * API responses in a general fashion.
+ * 
+ * @author Team Mercury
  */
 public class CompositeComponent extends ResponseComponent
 {
