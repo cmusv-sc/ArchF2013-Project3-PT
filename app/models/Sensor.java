@@ -1,9 +1,12 @@
 package models;
 
 /**
- * Representation of a Sensor
- * A Sensor is expected to have a containing DeviceType
- * as well as a SensorType
+ * Pure-Java (POJO) Representation of a Sensor
+ * Isolates the business logic of the app from potential changes in the
+ * data-access (DAO) layer.
+ * 
+ * A Sensor is currently expected to reference a DeviceType
+ * as well as a SensorType.
  * @author Team Mercury
  */
 public class Sensor implements ISensor

@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Comparable representation of DeviceType
+ * Pure-Java (POJO) Representation of a DeviceType.
+ * Isolates the business logic of the app from potential changes in the
+ * data-access (DAO) layer.
+ * 
+ * Implements Comparable
+ * 
  * A DeviceType contains a name identifer
  * as well as a list of SensorTypes that it supports
  * 

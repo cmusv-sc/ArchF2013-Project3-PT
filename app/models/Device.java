@@ -3,7 +3,10 @@ package models;
 import models.DeviceType;
 
 /**
- * Representation of a Device
+ * Pure-Java (POJO) Representation of a Device
+ * Isolates the business logic of the app from potential changes in the
+ * data-access (DAO) layer.
+ * 
  * Device is expected to contain a unique ID, a type,
  * an agent, and a location
  * @author Team Mercury
