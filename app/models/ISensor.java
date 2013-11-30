@@ -1,7 +1,7 @@
 package models;
 
 /**
- * @author danny brown
+ * @author Team Mercury
  * 
  * @responsibilities interface for the encapsulation of
  *                   a sensor object returned from platform
