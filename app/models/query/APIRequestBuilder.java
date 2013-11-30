@@ -5,7 +5,7 @@ import java.net.URLEncoder;
 
 /**
  * Builder class for API requests
- * @author geoffschaeffer
+ * @author Team Mercury
  */
 class APIRequestBuilder
 {

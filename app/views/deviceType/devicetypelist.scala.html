@@ -1,0 +1,16 @@
+@(deviceTypes:java.util.List[DeviceType])
+
+@if(deviceTypes.isEmpty) {
+    <p>No device type data available at this time. Please try again.</p>
+} else {
+    <table class="table table-striped">
+      <tr>
+        <th>Device Type Name</th>
+      </tr>
+      @for(deviceType <- deviceTypes) {
+        <tr>
+          <td>@deviceType.getType()</td>
+        </tr>
+      }
+    </table>
+}

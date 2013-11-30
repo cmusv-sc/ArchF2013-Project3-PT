@@ -1,0 +1,22 @@
+@(devices:java.util.List[Device])
+
+@if(devices.isEmpty) {
+    <p>No device data available at this time. Please try again.</p>
+} else {
+    <table class="table table-striped">
+      <tr>
+        <th>Device URI</th>
+        <th>Device Type</th>
+        <th>Device Agent</th>
+        <th>Device Location</th>
+      </tr>
+      @for(device <- devices) {
+        <tr>
+          <td>@device.getDeviceId()</td>
+          <td>@device.getDeviceType().getType()</td>
+          <td>@device.getDeviceAgent()</td>
+          <td>@device.getDeviceLocation()</td>
+        </tr>
+      }
+    </table>
+}

@@ -28,6 +28,18 @@ public class Devices extends Controller {
         return ok(views.html.deviceType.dropdown.render(deviceTypes));
     }
 
+    public static Result getDeviceTypeList() {
+        List<DeviceType> deviceTypes = null;
+        try {
+            DeviceManager deviceManager = new DeviceManager();
+            deviceTypes = deviceManager.getDeviceTypes();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+        return ok(views.html.deviceType.devicetypelist.render(deviceTypes));
+    }
+
     public static Result getSensorTypes(String deviceType) {
         try {
             List<SensorType> sensorTypes = null;
@@ -39,5 +51,53 @@ public class Devices extends Controller {
             e.printStackTrace();
             return badRequest();
         }
+    }
+
+     public static Result getSensors() {
+        List<Device> devices = null;
+        try {
+            DeviceManager deviceManager = new DeviceManager();
+            devices = deviceManager.getDevices();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+        return ok(views.html.devices.sensorlist.render(devices));
+    }
+
+    public static Result getDevices() {
+        List<Device> devices = null;
+        try {
+            DeviceManager deviceManager = new DeviceManager();
+            devices = deviceManager.getDevices();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+        return ok(views.html.devices.devicelist.render(devices));
+    }
+
+    public static Result getDeviceAgents() {
+    List<String> deviceAgents = null;
+        try {
+            DeviceManager deviceManager = new DeviceManager();
+            deviceAgents = deviceManager.getDeviceAgents();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+        return ok(views.html.devices.deviceagentlist.render(deviceAgents));
+    }
+
+    public static Result getAllSensorTypes() {
+    List<String> sensorTypes = null;
+    try {
+            DeviceManager deviceManager = new DeviceManager();
+            sensorTypes = deviceManager.getAllSensorTypes();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return badRequest(e.getMessage());
+        }
+        return ok(views.html.sensorType.sensortypelist.render(sensorTypes));
     }
 }

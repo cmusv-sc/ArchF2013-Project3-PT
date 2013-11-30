@@ -1,7 +1,6 @@
 @(title: String)(content: Html)
 
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>@title</title>
@@ -11,19 +10,19 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/main.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.datetimepicker.js")"></script>
         <script type="text/javascript" src="@routes.Application.javascriptRoutes()"></script>
     </head>
     <body>
-	  <header id="header" class="navbar navbar-inverse navbar-fixed-top">
-	    <div class="inner">
-	      <div class="pull-left">
+	  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	    <div class="row cmu-red">
+	      <div class="container">
+	      <div class="navbar-left">
 	        <h3 class="title-link">
 	          <a href="/">Carnegie Mellon University Silicon Valley</a>
 	        </h3>
 	      </div>
-	      <div class="actions pull-right" id="menuInHeader">
+	      <div class="actions navbar-right" id="menuInHeader">
 	        <h5>
 	          <a href="/dashboard">Dashboard</a> |
 	          <a href="/sensors">Sensors</a> |
@@ -34,7 +33,9 @@
 	            <a href="/users/sign_in">Log In</a>
 	        </h5>
 	      </div>
+	      </div>
 	    </div>
+<<<<<<< HEAD
 	  </header>	
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
@@ -43,6 +44,9 @@
             </div>
 
         </nav>
+=======
+	  </nav> 
+>>>>>>> master
         <div class="container">
 			<div id="homePageSpacer"></div>
 			<div class="row">

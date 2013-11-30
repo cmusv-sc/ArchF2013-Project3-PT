@@ -1,8 +1,8 @@
 package models.query;
 
 /**
- * Representation of a query time argument
- * @author geoffschaeffer
+ * Representation of an API query time argument
+ * @author Team Mercury
  */
 public class QueryTimeArg extends QueryArg
 {   

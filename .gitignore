@@ -18,3 +18,5 @@ atlassian-ide-plugin.xml
 .metadata
 /RemoteSystemsTempFiles/
 .gitignore~
+*.swp
+.DS_Store

@@ -3,9 +3,13 @@ package models.query;
 import java.util.Iterator;
 
 /**
- * Standard response to a query
+ * Standard response to a QueryRequest
  * Provides an iterator over ResponseComponents
- * @author geoffschaeffer
+ * 
+ * ResponseComponents use the Composite pattern to deal with
+ * API responses in a general fashion.
+ * 
+ * @author Team Mercury
  */
 public class QueryResponse implements Iterable<ResponseComponent>
 {

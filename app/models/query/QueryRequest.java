@@ -1,15 +1,21 @@
 package models.query;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import com.fasterxml.jackson.databind.JsonNode;
 
 import play.libs.WS;
 
 /**
  * This class houses the low-level interface with the Sensor API
- * @author geoffschaeffer
+ * Currently, the data access is done via the HTTP APIs at:
+ * https://github.com/SensorServicePlatform
+ * 
+ * However, if this implementation changes in the future, downstream classes
+ * (in the Manager or POJO layer) should require no (or minimal) changes
+ * 
+ * QueryRequest will execute different APIs. It expects different Query*Args
+ * (API arguments wrapped in a Java object) and returns a QueryResponse.
+ * 
+ * @author Team Mercury
  */
 public class QueryRequest 
 {

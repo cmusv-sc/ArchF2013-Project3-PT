@@ -4,17 +4,30 @@
 
 # Home page
 GET        /                                               controllers.Application.index()
-GET        /sensors                                        controllers.Application.sensors()
 
 # Dashboard
 GET        /dashboard                                      controllers.Application.dashboard()
 GET        /dashboard/getDeviceMetadata/:deviceType        controllers.Dashboard.getSensorTypesAndDeviceId(deviceType: String)
 
 # Devices
+GET        /devices                                        controllers.Application.devices()
 GET        /deviceTypes                                    controllers.Devices.getDeviceTypes()
 #GET        /devices/deviceType/:deviceType        controllers.Devices.getDeviceTypes()
 GET        /sensorTypes/:deviceType                        controllers.Devices.getSensorTypes(deviceType: String)
+GET        /device_agents                                  controllers.Application.deviceAgents()
+GET        /device_agents/deviceAgents                     controllers.Devices.getDeviceAgents()
 
+# Sensors
+GET        /sensors                                        controllers.Application.sensors()
+GET        /sensors/devices                                controllers.Devices.getDevices()
+
+# Sensor Types
+GET        /sensor_types                                   controllers.Application.sensorTypes()
+GET        /sensor_types/allSensorTypes                    controllers.Devices.getAllSensorTypes()
+
+# DeviceTypes
+GET        /device_types                                   controllers.Application.deviceTypes()
+GET        /device_types/deviceTypeList                    controllers.Devices.getDeviceTypeList()
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file                                   controllers.Assets.at(path="/public", file)
 

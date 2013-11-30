@@ -1,0 +1,16 @@
+@(deviceAgents:java.util.List[String])
+
+@if(deviceAgents.isEmpty) {
+    <p>No device agent data available at this time. Please try again.</p>
+} else {
+    <table class="table table-striped">
+      <tr>
+        <th>Device Agent Name</th>
+      </tr>
+      @for(deviceAgent <- deviceAgents) {
+        <tr>
+          <td>@deviceAgent</td>
+        </tr>
+      }
+    </table>
+}
