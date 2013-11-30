@@ -222,7 +222,7 @@ public class DeviceManager
       {
          deviceAgentSet.add(device.getDeviceAgent());
       }
-      List<String> deviceAgents = new ArrayList(deviceAgentSet);
+      List<String> deviceAgents = new ArrayList<String>(deviceAgentSet);
       return deviceAgents;
    }
 
@@ -236,7 +236,7 @@ public class DeviceManager
             sensorTypeSet.add(sensorType.getType());
          }
       }
-      List<String> sensorTypes = new ArrayList(sensorTypeSet);
+      List<String> sensorTypes = new ArrayList<String>(sensorTypeSet);
       return sensorTypes;
    }
 
