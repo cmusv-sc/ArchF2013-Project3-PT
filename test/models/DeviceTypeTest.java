@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 /**
- * Contains unit tests for Device class
+ * Contains unit tests for DeviceType class
  * @author Team Mercury
  */
 @RunWith(JUnit4.class)
