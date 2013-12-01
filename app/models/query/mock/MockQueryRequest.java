@@ -65,11 +65,15 @@ public class MockQueryRequest implements IQueryRequest
       return retVal;
    }
    
-   //currently, these don't have json, since the API is down
-   private static final String MOCK_ALLDEVICES_JSON = "";
-   private static final String MOCK_SENSORTYPES_JSON = "";
-   private static final String MOCK_TIMEPOINT_JSON = "";
-   private static final String MOCK_TIMERANGE_JSON = "";
-   private static final String MOCK_LAST_JSON = "";
-   private static final String MOCK_LASTEST_JSON = "";
+   private static final String MOCK_ALLDEVICES_JSON = "[{\"device_type\":\"Firefly_v3\",\"device_location\":\"B23.216\",\"device_agent\":\"SensorAndrew2\",\"uri\":\"10170202\"}]";
+   
+   private static final String MOCK_SENSORTYPES_JSON = "{\"device_type\":\"Firefly_v3\", \"sensor_type\":\"temp,digital_temp,light,pressure,humidity,motion,audio_p2p,acc_x,acc_y,acc_z\"}";
+   
+   private static final String MOCK_TIMEPOINT_JSON = "{\"timestamp\":1368568896000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}";
+   
+   private static final String MOCK_TIMERANGE_JSON = "[{\"timestamp\":1368568993000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}, {\"timestamp\":1368568896000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}]";
+   
+   private static final String MOCK_LAST_JSON = "[{\"timestamp\":1368568896000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}]";
+   
+   private static final String MOCK_LASTEST_JSON = "[{\"timestamp\":1368568896000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}]";
 }
