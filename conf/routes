@@ -4,10 +4,14 @@
 
 # Home page
 GET        /                                               controllers.Application.index()
+GET        /sensors                                        controllers.Application.sensors()
 
 # Dashboard
 GET        /dashboard                                      controllers.Application.dashboard()
 GET        /dashboard/getDeviceMetadata/:deviceType        controllers.Dashboard.getSensorTypesAndDeviceId(deviceType: String)
+
+# Sensor Reading
+GET        /getReading                                     controllers.Dashboard.getReading()
 
 # Devices
 GET        /devices                                        controllers.Application.devices()

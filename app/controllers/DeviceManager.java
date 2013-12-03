@@ -34,18 +34,18 @@ import java.util.Set;
 public class DeviceManager
 {
    private static final String DEVICE_AGENT = "device_agent";
-   private static final String DEVICE_ID = "device_id";
+   public static final String DEVICE_ID = "device_id";
    private static final String DEVICE_LOCATION = "device_location";
    private static final String DEVICE_TYPE = "device_type";
-   private static final String END_TIME = "end_time";
+   public static final String END_TIME = "end_time";
    private static final String LAST_READINGS = "last_readings";
    private static final String LASTEST_READINGS = "lastest_readings";
    private static final String POINT_IN_TIME_READING = "point_in_time_reading";
-   private static final String QUERY_TYPE = "query_type";
-   private static final String SENSOR_TYPE = "sensor_type";
-   private static final String START_TIME = "start_time";
+   protected static final String QUERY_TYPE = "query_type";
+   public static final String SENSOR_TYPE = "sensor_type";
+   public static final String START_TIME = "start_time";
    private static final String TIMESTAMP = "time";
-   private static final String TIMEFRAME_READINGS = "timeframe_readings";
+   protected static final String TIMEFRAME_READINGS = "timeframe_readings";
    private static final String URI = "uri";
    private static final String VALUE = "value";
 
@@ -393,11 +393,14 @@ public class DeviceManager
       for(ResponseComponent respNode : response) 
       {
          CompositeComponent readingNode = (CompositeComponent) respNode;
-         SensorReading sensorReading = new SensorReading(readingNode.getValueAsString(DEVICE_ID),
-                                                         readingNode.getValueAsString(SENSOR_TYPE),
-                                                         readingNode.getValueAsString(VALUE),
-                                                         readingNode.getValueAsString(TIMESTAMP));
-         sensorReadings.add(sensorReading);     
+          if (readingNode.get(DEVICE_ID)!= null && !readingNode.getValueAsString(DEVICE_ID).isEmpty()) {
+              SensorReading sensorReading = new SensorReading(readingNode.getValueAsString(DEVICE_ID),
+                                                               readingNode.getValueAsString(SENSOR_TYPE),
+                                                               readingNode.getValueAsString(VALUE),
+                                                               readingNode.getValueAsString(TIMESTAMP));
+               sensorReadings.add(sensorReading);
+          }
+
       }
       return sensorReadings;
    }

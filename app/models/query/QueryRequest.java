@@ -2,6 +2,7 @@ package models.query;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import play.Logger;
 import play.libs.Json;
 import play.libs.WS;
 
@@ -169,6 +170,8 @@ public class QueryRequest implements IQueryRequest
       QueryResponse retVal = null;
       
       String requestUrl = request.toString();
+       Logger.info("Request: " + requestUrl);
+
             
       //go synchronus for ease of impl
       WS.Response response = WS.url(requestUrl).get().get(DEFAULT_TIMEOUT);
