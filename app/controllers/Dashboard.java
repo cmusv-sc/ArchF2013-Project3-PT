@@ -1,10 +1,12 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.DeviceType;
 import models.SensorReading;
 import models.SensorType;
 import play.data.DynamicForm;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -44,6 +46,17 @@ public class Dashboard extends Controller
         Map<String, String> parameters = toMap(formData);
 
         List<SensorReading> sensorReadings = deviceManager.getSensorReadings(parameters);
+        if(sensorReadings.isEmpty()) {
+            return notFound("No data found");
+        } else {
+            ObjectNode data = Json.newObject();
+            for (SensorReading sensorReading : sensorReadings) {
+                ObjectNode reading = Json.newObject();
+                reading.put("x", sensorReading.getTimestamp());
+                reading.put("y", sensorReading.getValue());
+                data.put(reading);
+            }
+        }
         return play.mvc.Results.ok(views.html.sensorReading.chart.render(sensorReadings));
     }
 
