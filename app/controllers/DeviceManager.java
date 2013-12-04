@@ -4,6 +4,7 @@ import models.query.CompositeComponent;
 import models.query.IQueryRequest;
 import models.query.QueryDeviceArg;
 import models.query.QueryRequest;
+import models.query.QueryRequestFactory;
 import models.query.QueryResponse;
 import models.query.QuerySensorTypeArg;
 import models.query.QueryTimeArg;
@@ -62,8 +63,7 @@ public class DeviceManager
     */
    public List<Device> getDevices()
    {
-      //IQueryRequest request = new QueryRequest();
-      IQueryRequest request = new MockQueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse deviceResp = request.getAllDevices();
       Set<DeviceType> deviceTypes = makeDeviceTypeSet(deviceResp);
       deviceTypes = addSensorTypes(request, deviceTypes);
@@ -87,8 +87,7 @@ public class DeviceManager
     */
    public List<DeviceType> getDeviceTypes()
    {
-      //IQueryRequest request = new QueryRequest();
-      IQueryRequest request = new MockQueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse deviceResp = request.getAllDevices();
       Set<DeviceType> deviceTypes = makeDeviceTypeSet(deviceResp);
       deviceTypes = addSensorTypes(request, deviceTypes);
@@ -149,8 +148,7 @@ public class DeviceManager
     */
    public List<String> getDeviceIds(DeviceType deviceType)
    {
-      //IQueryRequest request = new QueryRequest();
-      IQueryRequest request = new MockQueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse deviceResp = request.getAllDevices();
       List<String> idList = new ArrayList<String>();
       for(ResponseComponent deviceNode: deviceResp) 
@@ -194,8 +192,7 @@ public class DeviceManager
    public List<SensorType> getSensorTypes(String deviceType) 
    {
       QueryDeviceArg query = new QueryDeviceArg(deviceType);
-      //IQueryRequest request = new QueryRequest();
-      IQueryRequest request = new MockQueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse response = request.getSensorTypes(query);
       Set<SensorType> sTypeSet = makeSensorTypeSet(response);
       //take this to List so we can enforce an ordering on it
@@ -214,8 +211,7 @@ public class DeviceManager
    public List<SensorReading> getSensorReadings(Map<String, String> parameters)
    {
       String queryType = parameters.get(QUERY_TYPE);
-      //IQueryRequest request = new QueryRequest();
-      IQueryRequest request = new MockQueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse response = null;
        switch (queryType) {
            case LAST_READINGS: {
@@ -346,8 +342,7 @@ public class DeviceManager
       for (DeviceType deviceType : deviceTypes)
       {
          QueryDeviceArg deviceTypeArg = new QueryDeviceArg(deviceType.getType());
-         //IQueryRequest currRequest = new QueryRequest();
-         IQueryRequest currRequest = new MockQueryRequest();
+         IQueryRequest currRequest = QueryRequestFactory.makeQueryRequest();
          sensorTypeResp = currRequest.getSensorTypes(deviceTypeArg);
          
          for(ResponseComponent sTypeNode : sensorTypeResp)
