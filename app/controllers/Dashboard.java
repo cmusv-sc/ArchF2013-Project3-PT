@@ -40,7 +40,7 @@ public class Dashboard extends Controller
 
     /**
      * GET /readings.json
-     * @return
+     * @return Result
      */
     public static Result getReading() {
         DeviceManager deviceManager = new DeviceManager();
@@ -70,7 +70,7 @@ public class Dashboard extends Controller
     /**
      * private helper for generating parameter map from dynamic form.
      * @param formData
-     * @return {@link Map<String,String>} parameters
+     * @return @link Map<String,String>} parameters
      */
     private static Map<String, String> toMap(DynamicForm formData) {
         Map<String, String> parameters = new HashMap<>();
