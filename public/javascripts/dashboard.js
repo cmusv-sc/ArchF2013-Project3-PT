@@ -59,7 +59,8 @@ $(function(){
                 $('#chartActivity').show();
             },
             success: function(data){
-                $('#chartContainer').html(data);
+                var dataJsonArray = $.parseJSON(data);
+                chartData(dataJsonArray);
             },
             error: function (jqxhr, code, msg) {
                 $('#chartContainer').html(code);
@@ -68,33 +69,15 @@ $(function(){
                 $('#chartActivity').hide();
             }
         });*/
-        /*new Rickshaw.Graph.Ajax({
-            element: document.getElementById('chart'),
-            width: 750,
-            renderer:'line',
-            dataURL: '/getReading',
-            onData: function(d){
-                d[0].data[0].y = 80;
-                return d;
-            },
-            onComplete: function(transport){
-                var graph = transport.graph;
-                var detail = new Rickshaw.Graph.HoverDetail({graph: graph});
-            },
-            series:[{
-                color:'steelblue'
-            }]
-        });*/
-
         var data = [ { x: -1893456000, y: 92228531 }, { x: -1577923200, y: 106021568 }, { x: -1262304000, y: 123202660 }, { x: -946771200, y: 132165129 }, { x: -631152000, y: 151325798 }, { x: -315619200, y: 179323175 }, { x: 0, y: 203211926 }, { x: 315532800, y: 226545805 }, { x: 631152000, y: 248709873 }, { x: 946684800, y: 281421906 }, { x: 1262304000, y: 308745538 } ];
         chartData(data);
     });
 
 });
 
-function chartData(chartElement, data) {
+function chartData(data) {
     var graph = new Rickshaw.Graph( {
-            element: document.querySelector(chartElement),
+            element: document.querySelector('#chart'),
             width: 750,
 //                height: 250,
             series: [ {
