@@ -52,7 +52,7 @@ public class DeviceManager
    public static final String SENSOR_TYPE = "sensor_type";
    /** START_TIME tag */
    public static final String START_TIME = "start_time";
-   private static final String TIMESTAMP = "time";
+   private static final String TIMESTAMP = "timestamp";
    protected static final String TIMEFRAME_READINGS = "timeframe_readings";
    private static final String URI = "uri";
    private static final String VALUE = "value";

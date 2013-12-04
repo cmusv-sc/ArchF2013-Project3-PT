@@ -71,7 +71,7 @@ public class MockQueryRequest implements IQueryRequest
    
    private static final String MOCK_TIMEPOINT_JSON = "{\"timestamp\":1368568896000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}";
    
-   private static final String MOCK_TIMERANGE_JSON = "[{\"timestamp\":1368568993000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}, {\"timestamp\":1368568896000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}]";
+   private static final String MOCK_TIMERANGE_JSON = "[{\"timestamp\":1358568993000,\"sensor_type\":\"temp\",\"value\":218,\"device_id\":\"10170102\"}, {\"timestamp\":1368568896000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}]";
    
    private static final String MOCK_LAST_JSON = "[{\"timestamp\":1368568896000,\"sensor_type\":\"temp\",\"value\":518,\"device_id\":\"10170102\"}]";
    

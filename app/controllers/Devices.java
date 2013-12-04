@@ -3,6 +3,7 @@ package controllers;
 import models.Device;
 import models.DeviceType;
 import models.SensorType;
+import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -28,8 +29,8 @@ public class Devices extends Controller
          deviceTypes = deviceManager.getDeviceTypes();
       } catch (Exception e)
       {
-         e.printStackTrace();
-         return badRequest(e.getMessage());
+          Logger.error(e.getMessage(), e);
+          return internalServerError(e.getMessage());
       }
       return ok(views.html.deviceType.dropdown.render(deviceTypes));
    }
