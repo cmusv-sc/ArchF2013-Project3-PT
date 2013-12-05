@@ -1,6 +1,5 @@
 package controllers;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.DeviceType;
 import models.SensorReading;
@@ -11,7 +10,6 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import scala.util.parsing.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
