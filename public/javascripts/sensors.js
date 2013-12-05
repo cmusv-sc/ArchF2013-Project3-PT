@@ -1,5 +1,5 @@
 $(function(){
-    jsRoutes.controllers.Devices.getDevices().ajax({
+    jsRoutes.controllers.Devices.getSensors().ajax({
         beforeSend: function(){
             $('#loading').show();
         },

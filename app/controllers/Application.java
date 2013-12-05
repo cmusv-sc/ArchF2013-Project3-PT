@@ -51,6 +51,7 @@ public class Application extends Controller
             routes.javascript.Devices.getDevices(),
             routes.javascript.Devices.getDeviceTypes(),
             routes.javascript.Devices.getDeviceTypeList(),
+            routes.javascript.Devices.getSensors(),
             routes.javascript.Devices.getSensorTypes(),
             routes.javascript.Dashboard.getSensorTypesAndDeviceId(),
             routes.javascript.Dashboard.getReading()));
