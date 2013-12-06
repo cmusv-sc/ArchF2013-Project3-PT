@@ -20,3 +20,4 @@ Building the code
 - Install Play Framework. Instruction can be found at http://www.playframework.com/documentation/2.2.x/Installing
 - Downlaod the source code from https://github.com/robwblack/mercury
 - From the parent folder, run the command: 'play run'
+- App will available at localhost:9000
