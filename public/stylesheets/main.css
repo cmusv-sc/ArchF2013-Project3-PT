@@ -9,7 +9,7 @@ body { padding-top: 70px; }
   background-color: #85000A;
 }
 
-.navbar.navbar-inverse a:link;{
+.navbar.navbar-inverse a:link {
   color: white;
 }
 
@@ -47,4 +47,19 @@ h3.title-link a:hover {
 }
 #lastRowOnHomePage {
 	padding-bottom: 100px;
+}
+/*Rickshaw Chart CSS*/
+#chartContainer {
+        position: relative;
+        font-family: Arial, Helvetica, sans-serif;
+}
+#chart {
+        position: relative;
+        left: 40px;
+}
+#y-axis {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 40px;
 }

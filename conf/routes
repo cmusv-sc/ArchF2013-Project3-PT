@@ -4,13 +4,18 @@
 
 # Home page
 GET        /                                               controllers.Application.index()
+GET        /sensors                                        controllers.Application.sensors()
 
 # Dashboard
 GET        /dashboard                                      controllers.Application.dashboard()
 GET        /dashboard/getDeviceMetadata/:deviceType        controllers.Dashboard.getSensorTypesAndDeviceId(deviceType: String)
 
+# Sensor Reading
+GET        /getReading                                     controllers.Dashboard.getReading()
+
 # Devices
 GET        /devices                                        controllers.Application.devices()
+GET        /devices/deviceList                             controllers.Devices.getDevices()
 GET        /deviceTypes                                    controllers.Devices.getDeviceTypes()
 #GET        /devices/deviceType/:deviceType        controllers.Devices.getDeviceTypes()
 GET        /sensorTypes/:deviceType                        controllers.Devices.getSensorTypes(deviceType: String)
@@ -19,7 +24,7 @@ GET        /device_agents/deviceAgents                     controllers.Devices.g
 
 # Sensors
 GET        /sensors                                        controllers.Application.sensors()
-GET        /sensors/devices                                controllers.Devices.getDevices()
+GET        /sensors/sensorList                             controllers.Devices.getSensors()
 
 # Sensor Types
 GET        /sensor_types                                   controllers.Application.sensorTypes()

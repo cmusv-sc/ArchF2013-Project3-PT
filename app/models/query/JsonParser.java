@@ -56,7 +56,7 @@ class JsonParser
             ResponseComponent valComp; 
             if(valNode.isValueNode())
             {
-               valComp = new ValueComponent<String>(valNode.textValue());
+               valComp = new ValueComponent<String>(valNode.asText());
             }
             else if(valNode.isArray())
             {

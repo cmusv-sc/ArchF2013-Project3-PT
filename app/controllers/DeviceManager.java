@@ -1,12 +1,15 @@
 package controllers;
 
 import models.query.CompositeComponent;
+import models.query.IQueryRequest;
 import models.query.QueryDeviceArg;
 import models.query.QueryRequest;
+import models.query.QueryRequestFactory;
 import models.query.QueryResponse;
 import models.query.QuerySensorTypeArg;
 import models.query.QueryTimeArg;
 import models.query.ResponseComponent;
+import models.query.mock.MockQueryRequest;
 import models.Device;
 import models.DeviceType;
 import models.SensorReading;
@@ -20,21 +23,37 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * DeviceManager is a controller intermediary between
+ * the DAO (Data-Access) layer and the controller. It will construct and supply 
+ * the business logic with the POJOs defined in the 'models' package, using the
+ * API implementation supplied in the 'models/query' package.
+ * 
+ * DeviceManager helps to further insulate the Application views from changes in 
+ * the DAO layer.
+ * 
+ * @author Team Mercury
+ */
+@SuppressWarnings("unused")
 public class DeviceManager
 {
    private static final String DEVICE_AGENT = "device_agent";
-   private static final String DEVICE_ID = "device_id";
+   /** DEVICE_ID tag */
+   public static final String DEVICE_ID = "device_id";
    private static final String DEVICE_LOCATION = "device_location";
    private static final String DEVICE_TYPE = "device_type";
-   private static final String END_TIME = "end_time";
+   /** END_TIME tag */
+   public static final String END_TIME = "end_time";
    private static final String LAST_READINGS = "last_readings";
    private static final String LASTEST_READINGS = "lastest_readings";
    private static final String POINT_IN_TIME_READING = "point_in_time_reading";
-   private static final String QUERY_TYPE = "query_type";
-   private static final String SENSOR_TYPE = "sensor_type";
-   private static final String START_TIME = "start_time";
-   private static final String TIMESTAMP = "time";
-   private static final String TIMEFRAME_READINGS = "timeframe_readings";
+   protected static final String QUERY_TYPE = "query_type";
+   /** SENSOR_TYPE tag */
+   public static final String SENSOR_TYPE = "sensor_type";
+   /** START_TIME tag */
+   public static final String START_TIME = "start_time";
+   private static final String TIMESTAMP = "timestamp";
+   protected static final String TIMEFRAME_READINGS = "timeframe_readings";
    private static final String URI = "uri";
    private static final String VALUE = "value";
 
@@ -44,7 +63,7 @@ public class DeviceManager
     */
    public List<Device> getDevices()
    {
-      QueryRequest request = new QueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse deviceResp = request.getAllDevices();
       Set<DeviceType> deviceTypes = makeDeviceTypeSet(deviceResp);
       deviceTypes = addSensorTypes(request, deviceTypes);
@@ -62,9 +81,13 @@ public class DeviceManager
       return devices;
    }
 
+   /**
+    * Gets the list of DeviceTypes available in the sensor network
+    * @return A List of DeviceType
+    */
    public List<DeviceType> getDeviceTypes()
    {
-      QueryRequest request = new QueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse deviceResp = request.getAllDevices();
       Set<DeviceType> deviceTypes = makeDeviceTypeSet(deviceResp);
       deviceTypes = addSensorTypes(request, deviceTypes);
@@ -76,14 +99,9 @@ public class DeviceManager
 
    /**
     * Provide a reverse-lookup of DeviceType by sensor type
-    * (This is an example of how to implement this functionality. It can
-    * be improved a lot by storing the built reverse-map somewhere.)
     * @param sensorType
     * @param deviceTypeList - assumes we have access to the collection of all DeviceTypes 
-    * (This param can be removed if we get access to our built-up device types from a 
-    * cache or something.)
     * @return List of DeviceTypes
-    * (I haven't had time to test this - but it should be good.)
     */
    public List<DeviceType> getDeviceTypes(SensorType sensorType, List<DeviceType> deviceTypeList)
    {
@@ -94,6 +112,11 @@ public class DeviceManager
       return dTypeList;
    }
    
+   /**
+    * Helper for getDeviceTypes
+    * @param deviceTypeList
+    * @return Map<SensorType, List<DeviceType>>
+    */
    private Map<SensorType, List<DeviceType>> makeSensorTypeToDeviceTypeMap(List<DeviceType> deviceTypeList)
    {
       Map<SensorType, List<DeviceType>> revMap = new HashMap<SensorType, List<DeviceType>>();
@@ -118,9 +141,14 @@ public class DeviceManager
       return revMap;
    }
 
+   /**
+    * Get the list of DeviceIds for a given DeviceType
+    * @param deviceType
+    * @return List of Strings (that represent device ids)
+    */
    public List<String> getDeviceIds(DeviceType deviceType)
    {
-      QueryRequest request = new QueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse deviceResp = request.getAllDevices();
       List<String> idList = new ArrayList<String>();
       for(ResponseComponent deviceNode: deviceResp) 
@@ -138,9 +166,7 @@ public class DeviceManager
    }
 
    /**
-    * Stub method for getting a list of DeviceIds by sensorType
-    * (I ran out of time to implement this one - but the impl is similar to
-    * getDeviceType(SensorType) )
+    * Get the list of DeviceIds by SensorType
     * @param sensorType
     * @return list of device ids
     */
@@ -158,10 +184,15 @@ public class DeviceManager
       return idList;
    }
    
+   /**
+    * Get a list of SensorTypes by DeviceType
+    * @param deviceType
+    * @return List of SensorType
+    */
    public List<SensorType> getSensorTypes(String deviceType) 
    {
       QueryDeviceArg query = new QueryDeviceArg(deviceType);
-      QueryRequest request = new QueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse response = request.getSensorTypes(query);
       Set<SensorType> sTypeSet = makeSensorTypeSet(response);
       //take this to List so we can enforce an ordering on it
@@ -170,10 +201,17 @@ public class DeviceManager
       return sensorTypeList;
    }
 
+   /**
+    * Route a request for sensor readings to the correct underlying Cat2 API
+    * Either: LAST_READINGS, LASTEST_READINGS, TIMEFRAME_READINGS, or
+    * POINT_IN_TIME_READINGS
+    * @param parameters
+    * @return List of SensorReading
+    */
    public List<SensorReading> getSensorReadings(Map<String, String> parameters)
    {
       String queryType = parameters.get(QUERY_TYPE);
-      QueryRequest request = new QueryRequest();
+      IQueryRequest request = QueryRequestFactory.makeQueryRequest();
       QueryResponse response = null;
        switch (queryType) {
            case LAST_READINGS: {
@@ -214,6 +252,10 @@ public class DeviceManager
       return makeSensorReadingList(response);
    }
 
+   /**
+    * Get device agents available in the sensor network
+    * @return List of String (representing device agents)
+    */
    public List<String> getDeviceAgents()
    {
       List<Device> devices = getDevices();
@@ -226,6 +268,10 @@ public class DeviceManager
       return deviceAgents;
    }
 
+   /**
+    * Get sensor types available in the sensor network
+    * @return List of String (representing sensor types)
+    */
    public List<String> getAllSensorTypes()
    {
       List<Device> devices = getDevices();
@@ -240,6 +286,11 @@ public class DeviceManager
       return sensorTypes;
    }
 
+   /**
+    * Helper to make set of deviceTypes
+    * @param devices
+    * @return Set of DeviceType
+    */
    private Set<DeviceType> makeDeviceTypeSet(QueryResponse devices) 
    {
       Set<DeviceType> deviceTypes = new HashSet<DeviceType>();
@@ -256,6 +307,11 @@ public class DeviceManager
       return deviceTypes;
    }
 
+   /**
+    * Helper to make set of sensorTypes
+    * @param sensors
+    * @return Set of SensorType
+    */
    private Set<SensorType> makeSensorTypeSet(QueryResponse sensors)
    {
       Set<SensorType> sensorTypes = new HashSet<SensorType>();
@@ -274,13 +330,19 @@ public class DeviceManager
       return sensorTypes;
    }
 
-   private Set<DeviceType> addSensorTypes(QueryRequest request, Set<DeviceType> deviceTypes)
+   /**
+    * Helper to add sensor types to device types
+    * @param request
+    * @param deviceTypes
+    * @return Set of DeviceType
+    */
+   private Set<DeviceType> addSensorTypes(IQueryRequest request, Set<DeviceType> deviceTypes)
    {
       QueryResponse sensorTypeResp;
       for (DeviceType deviceType : deviceTypes)
       {
          QueryDeviceArg deviceTypeArg = new QueryDeviceArg(deviceType.getType());
-         QueryRequest currRequest = new QueryRequest();
+         IQueryRequest currRequest = QueryRequestFactory.makeQueryRequest();
          sensorTypeResp = currRequest.getSensorTypes(deviceTypeArg);
          
          for(ResponseComponent sTypeNode : sensorTypeResp)
@@ -298,6 +360,11 @@ public class DeviceManager
       return deviceTypes;
    }
 
+   /**
+    * Helper to take a list of sensor types as a string to a List
+    * @param sensorTypesStr
+    * @return List of String (representing sensor types)
+    */
    private List<String> parseSensorTypesToList(String sensorTypesStr)
    {
        List<String> retList = new ArrayList<String>();
@@ -308,6 +375,11 @@ public class DeviceManager
        return retList;
    }
    
+   /**
+    * Helper to map tag to DeviceType
+    * @param deviceTypes
+    * @return Map of tag to DeviceType
+    */
    private Map<String, DeviceType> makeDeviceTypeMap(Set<DeviceType> deviceTypes)
    {
       Map<String, DeviceType> deviceTypeMap = new HashMap<String, DeviceType>();
@@ -318,17 +390,25 @@ public class DeviceManager
       return deviceTypeMap;
    }
 
+   /**
+    * Helper to make a List of SensorReading
+    * @param response
+    * @return List of SensorReading
+    */
    private List<SensorReading> makeSensorReadingList(QueryResponse response) 
    {
       List<SensorReading> sensorReadings = new ArrayList<SensorReading>();
       for(ResponseComponent respNode : response) 
       {
          CompositeComponent readingNode = (CompositeComponent) respNode;
-         SensorReading sensorReading = new SensorReading(readingNode.getValueAsString(DEVICE_ID),
-                                                         readingNode.getValueAsString(SENSOR_TYPE),
-                                                         readingNode.getValueAsString(VALUE),
-                                                         readingNode.getValueAsString(TIMESTAMP));
-         sensorReadings.add(sensorReading);     
+          if (readingNode.get(DEVICE_ID)!= null && !readingNode.getValueAsString(DEVICE_ID).isEmpty()) {
+              SensorReading sensorReading = new SensorReading(readingNode.getValueAsString(DEVICE_ID),
+                                                               readingNode.getValueAsString(SENSOR_TYPE),
+                                                               readingNode.getValueAsString(VALUE),
+                                                               readingNode.getValueAsString(TIMESTAMP));
+               sensorReadings.add(sensorReading);
+          }
+
       }
       return sensorReadings;
    }

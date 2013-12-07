@@ -2,6 +2,8 @@ package models.query;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import play.Logger;
+import play.libs.Json;
 import play.libs.WS;
 
 /**
@@ -17,7 +19,7 @@ import play.libs.WS;
  * 
  * @author Team Mercury
  */
-public class QueryRequest 
+public class QueryRequest implements IQueryRequest
 {
    /**
     * Builds and executes Cat3 API
@@ -168,6 +170,8 @@ public class QueryRequest
       QueryResponse retVal = null;
       
       String requestUrl = request.toString();
+       Logger.info("Request: " + requestUrl);
+
             
       //go synchronus for ease of impl
       WS.Response response = WS.url(requestUrl).get().get(DEFAULT_TIMEOUT);
@@ -209,6 +213,22 @@ public class QueryRequest
       }
       
       return isErr;
+   }
+   
+   /**
+    * Helper to convert a json-formatted string into a QueryResponse
+    * Mostly for use in mocks and tests
+    * @param jsonResponse
+    * @return QueryResponse
+    */
+   public static QueryResponse jsonStringToResponse(String jsonResponse)
+   {
+      QueryResponse retVal;
+      JsonNode convNode = Json.parse(jsonResponse);
+      
+      retVal = new QueryResponse(JsonParser.toArrayComponent(convNode));
+      
+      return retVal;
    }
    
    //--------------------------------------------------------------------------

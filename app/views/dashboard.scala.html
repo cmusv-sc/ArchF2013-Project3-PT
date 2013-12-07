@@ -9,6 +9,7 @@
                             src="@routes.Assets.at("images/activity_indicator.gif")" width="20">
                     </div>
                     <div id="deviceMetaData" class="panel-body">
+                    @helper.form(action = routes.Dashboard.getReading, 'id -> "sensorForm" ){
                         <div id="deviceTypeContainer">
                             <label for="deviceTypes">Device Type</label>
                             <select id="deviceTypes" class="form-control" disabled>
@@ -17,22 +18,30 @@
                         </div>
                         <div id="sensorTypeContainer">
                             <label for="sensorTypes">Sensor Type</label>
-                            <select id="sensorTypes" class="form-control" disabled>
+                            <select id="sensorTypes" name="@DeviceManager.SENSOR_TYPE" class="form-control" disabled>
                                 <option>Select Device Type first</option>
                             </select>
 
                             <label for="deviceIDs">Device ID</label>
-                            <select id="deviceIDs" class="form-control" disabled>
+                            <select id="deviceIDs" name="@DeviceManager.DEVICE_ID" class="form-control" disabled>
                                 <option>Select Sensor Type first</option>
                             </select>
                         </div>
                         <div id="timestampContainer">
                             <label for="fromTime">From</label>
                             <input type="text" id="fromTime" class="form-control"/>
+                            <input type="hidden" name="@DeviceManager.START_TIME" id="fromTimeEpoch"/>
 
                             <label for="fromTime">To</label>
                             <input type="text" id="toTime" class="form-control"/>
+                            <input type="hidden" name="@DeviceManager.END_TIME"  id="toTimeEpoch"/>
                         </div>
+                        <div>
+                            <button type="button" id="goChart" class="btn btn-primary btn-lg btn-block">Go Chart!</button>
+                        </div>
+
+                    }
+
                     </div>
                 </div>
             </div>
@@ -40,9 +49,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Chart
+                        <img id="chartActivity" style="display: none;"
+                            src="@routes.Assets.at("images/activity_indicator.gif")" width="20">
                     </div>
                     <div class="panel-body">
-                        TODO: chart
+                        <div id="chartContainer">
+                            <div id="y-axis"></div>
+                            <div id="chart"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,4 +64,7 @@
     </div>
 
     <script type="text/javascript" src="@routes.Assets.at("javascripts/dashboard.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/d3.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/d3.layout.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/rickshaw.min.js")"></script>
 }
