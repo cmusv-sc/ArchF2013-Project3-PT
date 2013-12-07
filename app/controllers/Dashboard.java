@@ -75,7 +75,7 @@ public class Dashboard extends Controller
      * @return @link Map<String,String>} parameters
      */
     private static Map<String, String> toMap(DynamicForm formData) {
-        Map<String, String> parameters = new HashMap<>();
+        Map<String, String> parameters = new HashMap<String, String>();
         parameters.put(DeviceManager.QUERY_TYPE, DeviceManager.TIMEFRAME_READINGS);
         parameters.put(DeviceManager.DEVICE_ID, formData.get(DeviceManager.DEVICE_ID));
         parameters.put(DeviceManager.SENSOR_TYPE, formData.get(DeviceManager.SENSOR_TYPE));
